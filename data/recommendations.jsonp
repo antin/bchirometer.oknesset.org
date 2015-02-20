@@ -1,5 +1,0 @@
-if (!window.mit) window.mit = {};
-window.mit.recommendations = {
-    "objects": [      
-    ]
-}
