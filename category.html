@@ -15,11 +15,12 @@
 <script src="lib/jquery-1.9.1.js"></script> 
   <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
    <script src="lib/category.js"></script>  
+   <script src="lib/agenda.js"></script>  
 </head>
 <body>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row-category">
     <div class="col-xs-12" style="background-color:lavender;"><h2 align="center" >מה נושא הראשון בחשיבות שלו?</h2></div>
     
 <p>&nbsp;</p>
@@ -29,8 +30,60 @@
 
 <script type="text/html" id='div-data'>    
      <% _.each(items,function(item,key,list){ %>
-	<div class="col-xs-6" style="background-color:lavenderblush;"><button type="button" class="btn btn-primary" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 ><%= item.category %> <% item.id %></h6></span></button></div>
+	<div class="col-xs-6" style="background-color:lavenderblush;">
+		<button type="button" class="btn btn-primary" onclick="loadAgendaByCategory('<%=item.category%>')" style="width:50px;height:50px;margin:2px;" >
+			<span class="glyphicon glyphicon-search small">
+				<h6 ><%= item.category %> <% item.id %></h6>
+			</span>
+		</button>
+	</div>
     <% }) %>
+</script>
+
+<div class="container-fluid"  >
+  <div class="row-agenda" >
+    
+    
+<p>&nbsp;</p>
+		<div class="col-xs-12" style="background-color:lavenderblush;">
+			<button onclick="loadCategory()" type="button" class="btn btn-default" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >לנושא הבא</h6></span></button>
+			<button onclick="showResult()" type="button" class="btn btn-primary" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >לתוצאות</h6></span></button>
+		</div>
+	</div>
+</div>
+<script src="lib/agenda.js"></script>   
+<script type="text/html" id='div-agenda-data'>    
+     <% _.each(items,function(item,key,list){ %>
+	 <div id="div-agenda-data-<%=item.id%>" >
+		 <div class="col-xs-12" style="background-color:lavender;"><h3 align="center" ><%= item.name %></h3></div>	
+		 <div class="col-xs-12" style="background-color:lavender;"><h4 align="center" ><%= item.public_owner_name %></h4></div>	
+		 <div class="col-xs-12" style="background-color:lavender;"><h5 align="center" ><%= item.description %></h5></div>	
+			<div class="col-xs-12" style="background-color:lavenderblush;">
+				<button type="button" onclick="calculateAgenda(<%=item.id%>,-1)" class="btn btn-danger" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >לא מסכים/ה</h6></span></button>
+				<button type="button" onclick="calculateAgenda(<%=item.id%>,0)" class="btn btn-default" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >נמנע/ה</h6></span></button>		
+				<button type="button" onclick="calculateAgenda(<%=item.id%>,1)" class="btn btn-success" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >מסכים/ה</h6></span></button>
+			</div>
+	 </div>
+    <% }) %>
+</script>
+
+<div class="container-fluid"  >
+  <div class="row-party" >
+        
+<p>&nbsp;</p>
+		<div id="div-party-button" class="col-xs-12" style="background-color:lavenderblush;">
+			<button onclick="loadCategory()" type="button" class="btn btn-default" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >לבחירה מחדש</h6></span></button>
+			<button type="button" class="btn btn-primary" style="width:50px;height:50px;margin:2px;" ><span class="glyphicon glyphicon-search small"><h6 >שתפ/י את התוצאות</h6></span></button>
+		 </div>
+	</div>	
+</div>
+
+<script type="text/html" id='div-party-result'>    
+     <% _.each(parties,function(party,key,list){ %>
+	 <div id="div-party-result-<%=party.id%>" >
+		 <div class="col-xs-12" style="background-color:lavender;"><h3 align="center" ><%= party.name %></h3></div>			 
+	 </div>	
+    <% }) %>     
 </script>
 
 </body>
