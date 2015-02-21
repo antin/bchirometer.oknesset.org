@@ -16,6 +16,7 @@
 	<meta property="og:image" content="http://oknesset.org/static/img/oknesset-logo-small.png">
 	<meta property="og:description" content="הבחירומטר הינו למעשה פיתוח טכנולוגי חכם אשר שואב את המידע מאתר כנסת פתוחה ומציג פרופיל עדכני של כל מפלגה, על-פי הפעילות הפרלמנטרית שלה בכנסת, או הצהרת הכוונות שלה, במידה והיא מפלגה חדשה. ">
 	<style>
+body{max-width: 28em;margin: 0 auto;}
 footer.pure-menu-fixed{bottom:0;top:inherit;}
 	</style>
 </head>
@@ -65,7 +66,7 @@ footer.pure-menu-fixed{bottom:0;top:inherit;}
 <!-- Templates -->
 <script type="text/html" id="category-list-template">
 <% _.each(items,function(item,key,list){ %>
-	<button type="button" class="btn btn-primary" onclick="loadAgendaByCategory('<%=item.category%>')">
+	<button type="button" class="pure-button" onclick="loadAgendaByCategory('<%=item.category%>')">
 		<span class="glyphicon glyphicon-search small">
 			<h6><%= item.category %> <% item.id %></h6>
 		</span>
