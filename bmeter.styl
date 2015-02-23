@@ -1,13 +1,18 @@
 // Bmeter styling…
 // Color palette.
-blueish=mediumslateblue
-darkblueish=darkslateblue
-darkgrayish=darkslategray
-grayish=gray
-greenish=green
-redish=tomato
-yellowish=gold
+blueish=#604dff
+darkblueish=#4c3dcc
+darkgrayish=#424242
+disabled=#c7c2f7
+grayish=#c7c2f7
+greenish=#009b42
+redish=#f95554
+yellowish=#f9c400
 // Layouts and stuff.
+a
+	footer li &,
+	header li &
+		color inherit
 body
 	max-width 30em
 	margin 4em auto
@@ -17,6 +22,7 @@ body
 	overflow-y scroll //??? Replace with nicer, JS-based, scrollbar, eg: perfectscrollbar.js.
 button
 footer a
+header a
 .button
 	display inline-block
 	margin 0
@@ -27,17 +33,22 @@ footer a
 	border none
 	outline none
 	box-sizing border-box
-	background white
-	color black
-	#splash &
+	&.fa::before
+		padding-left 0.5em
+	#splash>:not(footer) &
 		background white
 		color darkblueish
-	#categories-list &
-		width 8em
-		height 6em
-		margin 0.5em
-		background darkblueish
-		color white
+footer a
+#categories-list a
+	background darkblueish
+	color white
+#categories-list a
+	width 8em
+	height 6em
+	margin 0.5em
+.button
+	background white
+	color black
 footer
 header
 	position fixed
@@ -48,9 +59,6 @@ header
 	height 3em
 	background darkgrayish
 	color white
-	a
-		padding 1em
-		color inherit
 footer
 	bottom 0
 	top inherit
@@ -83,7 +91,7 @@ ol
 section
 	display none
 [disabled]
-	background grayish
+	background disabled
 .agree
 	border greenish solid medium
 	&.selected
@@ -121,3 +129,8 @@ section
 	font-style normal
 	src url(https://oknesset.org/static/font/Alef-regular.eot)
 	src url(https://oknesset.org/static/font/Alef-regular.eot?#iefix) format('embedded-opentype'), url(https://oknesset.org/static/font/Alef-regular.woff) format('woff'), url(https://oknesset.org/static/font/Alef-regular.ttf) format('truetype'), url(https://oknesset.org/static/font/Alef-regular.svg#alefregular) format('svg')
+// Fix FontAwesome's messing up our line-height.
+.fa
+	font inherit
+.fa::before
+	font-family FontAwesome
