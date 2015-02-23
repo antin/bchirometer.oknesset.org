@@ -1,8 +1,7 @@
-body{max-width:30em;margin:4em auto;background:#fff}
-button,footer a,.button,#categories-list>li>a{display:inline-block;margin:0;padding:1em;width:8em;height:6em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;outline:none;box-sizing:border-box;background:#fff;color:#000;}
-button.selected,footer a.selected,.button.selected,#categories-list>li>a.selected{border:solid thick #f00}
-#splash button,#splash footer a,#splash .button,#splash #categories-list>li>a{background:#fff;color:#000}
-#categories button,#categories footer a,#categories .button,#categories #categories-list>li>a{margin:.5em;background:#00f;color:#fff}
+body{max-width:30em;margin:4em auto;background:#fff;color:#000;font-family:Alef,sans-serif;overflow-y:scroll}
+button,footer a,.button{display:inline-block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;outline:none;box-sizing:border-box;background:#fff;color:#000;}
+#splash button,#splash footer a,#splash .button{background:#fff;color:#483d8b}
+#categories-list button,#categories-list footer a,#categories-list .button{width:8em;height:6em;margin:.5em;background:#483d8b;color:#fff}
 footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#2f4f4f;color:#fff;}
 footer a,header a{padding:1em;color:inherit}
 footer{bottom:0;top:inherit;background:#483d8b}
@@ -15,10 +14,15 @@ header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center}
 ol >li{display:inline-block}
 section{display:none}
-.agree{border:#008000}
 [disabled]{background:#808080}
-.disagree{border:#ff6347}
-.indifferent{border:#ffd700}
+.agree{border:#008000 solid medium;}
+.agree.selected{background:#008000}
+.disagree{border:#ff6347 solid medium;}
+.disagree.selected{background:#ff6347}
+.indifferent{border:#ffd700 solid medium;}
+.indifferent.selected{background:#ffd700}
 .splash{background:#7b68ee;color:#fff}
 #agendas-list>li{width:100%;text-align:start}
 #splash{text-align:center}
+@font-face{font-family:'Alef';font-weight:bold;font-style:normal;src:url("https://oknesset.org/font/Alef-bold.eot");src:url("https://oknesset.org/font/Alef-bold.eot?#iefix") format('embedded-opentype'),url("../font/Alef-bold.woff") format('woff'),url("../font/Alef-bold.ttf") format('truetype'),url("../font/Alef-bold.svg#alefbold") format('svg')}
+@font-face{font-family:'Alef';font-weight:normal;font-style:normal;src:url("https://oknesset.org/font/Alef-regular.eot");src:url("https://oknesset.org/font/Alef-regular.eot?#iefix") format('embedded-opentype'),url("../font/Alef-regular.woff") format('woff'),url("../font/Alef-regular.ttf") format('truetype'),url("../font/Alef-regular.svg#alefregular") format('svg')}
