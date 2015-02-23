@@ -2,12 +2,14 @@
 (function() {
   $(function() {
     var page_turner, show_page;
-    show_page = function(where) {
-      return $('body>section').hide().filter(where).show();
+    show_page = function(p) {
+      console.log('Page to', p);
+      $('section').hide().filter(p).show();
+      return $('body').toggleClass('splash', p === '#splash');
     };
-    page_turner = function(where) {
+    page_turner = function(p) {
       return function() {
-        return show_page(where);
+        return show_page(p);
       };
     };
     page.base('/');
@@ -16,7 +18,9 @@
       return show_page('#agendas');
     });
     page('results', page_turner('#results'));
-    page('*', page_turner('#splash'));
+    page('', function() {
+      return show_page('#splash');
+    });
     page();
     $('#categories-list').html(_.template($('#category-template').html(), {
       categories: categories

@@ -1,6 +1,9 @@
 $ ->
-	show_page=(where)->$('body>section').hide().filter(where).show()
-	page_turner=(where)->return ->return show_page where
+	show_page=(p)->
+		console.log 'Page to',p
+		$('section').hide().filter(p).show()
+		$('body').toggleClass 'splash',p is '#splash'
+	page_turner=(p)->return ->return show_page p
 	page.base '/'
 	page 'categories',page_turner '#categories'
 	page 'agendas',->
@@ -8,7 +11,7 @@ $ ->
 		#??? ...
 		show_page '#agendas'
 	page 'results',page_turner '#results'
-	page '*',page_turner '#splash' # Anything else, take us "home".
+	page '',->show_page '#splash' # Root page (or index.html?), take us "home".
 	page() # Begin listening to location changes.
 
 	# Populate categories and agendas from constant JS?!

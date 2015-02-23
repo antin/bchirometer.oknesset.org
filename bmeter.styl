@@ -1,8 +1,8 @@
 // Bmeter styling…
 body
-	max-width 28em
-	margin 3em auto 0
-	background cyan
+	max-width 30em
+	margin 4em auto
+	background white
 button
 footer a
 .button
@@ -11,6 +11,8 @@ footer a
 	margin 0
 	padding 1em
 	width 8em
+	height 6em
+	vertical-align middle
 	text-align center
 	text-decoration inherit
 	border none
@@ -29,39 +31,61 @@ footer a
 		color white
 footer
 header
+	position fixed
+	right 0
+	left 0
 	text-align center
 	width 100%
 	height 3em
-	background darkgray
+	background darkslategray
 	color white
-footer.pure-menu-fixed
+	a
+		padding 1em
+		color inherit
+footer
 	bottom 0
 	top inherit
+	background darkslateblue
 h1
 h2
-	margin 0 auto
+	margin 1rem auto
 	text-align center
 h4
-h5
+p
 	margin 0.5em 0
 	font-weight normal
 	word-wrap break-word
 header
-	position fixed
 	top 0
-	left 0
+	ol
+		margin 0
+	a
+		text-decoration inherit
 ol
 	header>&
 		list-style none
-	footer>&
+	footer>&,
 	section>&
 		margin 0 auto
 		padding 0
+		text-align center
 	>li
 		display inline-block
 section
 	display none
+.agree
+	border green
+[disabled]
+	background gray
+.disagree
+	border tomato
+.indifferent
+	border gold
+.splash
+	background mediumslateblue
+	color white
 #agendas-list>li
 	width 100%
+	text-align start
 #splash
 	text-align center
