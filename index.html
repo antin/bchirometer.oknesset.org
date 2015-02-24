@@ -55,6 +55,7 @@
 	</section>
 
 	<section id="agendas">
+		<h2></h2>
 		<ol id="agendas-list"></ol>
 		<footer>
 			<ol>
@@ -78,17 +79,17 @@
 <!-- Templates -->
 <script type="text/html" id="category-template">
 <%_.each(categories,function(e){
-%><li><a class="button" href="agendas#<%=JSON.stringify(e.id)%>"><%=e.category%></a></li
+%><li><a class="button fa <%e.fonticon%>" href="agendas#<%-JSON.stringify(e.id)%>"><%-e.category%></a></li
 ><%
 })%>
 </script>
 
 <script type="text/html" id="agenda-template">
 <%_.each(agendas,function(e){
-%><li id="agenda-<%=e.id%>">
-	<h3><%=e.name%></h3>
-	<h4>נערכה ע"י: <%=e.public_owner_name%></h4>
-	<p><%=e.description%></p>
+%><li id="agenda-<%-e.id%>">
+	<h3><a href="http://oknesset.org<%-e.absolute_url%>"><%-e.name%></a></h3>
+	<h4>נערכה ע"י: <%-e.public_owner_name%></h4>
+	<p><%-e.description%></p>
 	<button type="button" class="agree">בעד</button>
 	<button type="button" class="indifferent">לא אכפת</button>
 	<button type="button" class="disagree">נגד</button>
@@ -98,8 +99,8 @@
 
 <script type="text/html" id="party-template">
 <%_.each(parties,function(e){
-%><li id="party-<%=e.id%>">
-	 <h3><%=e.name%></h3>
+%><li id="party-<%-e.id%>">
+	 <h3><%-e.name%></h3>
 </li><%
 })%>
 </script>
