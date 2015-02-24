@@ -26,7 +26,7 @@ button
 footer a
 header a
 .button
-	display inline-block
+	display block
 	margin 0
 	padding 1em
 	vertical-align middle
@@ -38,11 +38,15 @@ header a
 	box-sizing border-box
 	&.fa::before
 		padding-left 0.5em
+	#agendas-list &
+		display inline-block
 	#splash>:not(footer) &
 		background white
 		color darkblueish
 footer a
 #categories-list a
+#about .button
+#qna .button
 	background darkblueish
 	color white
 #categories-list a

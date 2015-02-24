@@ -15,6 +15,8 @@
       };
     };
     page.base('/');
+    page('about', page_turner('#about'));
+    page('qna', page_turner('#qna'));
     page('categories', page_turner('#categories'));
     page('agendas', function(context) {
       var c, cid, showall;

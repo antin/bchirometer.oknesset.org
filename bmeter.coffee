@@ -6,6 +6,8 @@ $ ->
 		window.scrollTo 0,0
 	page_turner=(p)->return ->return show_page p
 	page.base '/'
+	page 'about',page_turner '#about'
+	page 'qna',page_turner '#qna'
 	page 'categories',page_turner '#categories'
 	page 'agendas',(context)->
 		# (Apparently, window.location is updated after this handler, so can't get URL hash from it. Page.js provides details in a "context" parameter.)

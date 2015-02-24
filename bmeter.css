@@ -1,10 +1,11 @@
 footer li a,header li a{color:inherit}
 body{max-width:28em;margin:4em auto;background:#fff;color:#000;font-family:Alef,sans-serif;overflow-y:scroll}
 button{background:#fff}
-button,footer a,header a,.button{display:inline-block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
+button,footer a,header a,.button{display:block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
 button.fa::before,footer a.fa::before,header a.fa::before,.button.fa::before{padding-left:.5em}
+#agendas-list button,#agendas-list footer a,#agendas-list header a,#agendas-list .button{display:inline-block}
 #splash>:not(footer) button,#splash>:not(footer) footer a,#splash>:not(footer) header a,#splash>:not(footer) .button{background:#fff;color:#4c3dcc}
-footer a,#categories-list a{background:#4c3dcc;color:#fff}
+footer a,#categories-list a,#about .button,#qna .button{background:#4c3dcc;color:#fff}
 #categories-list a{width:8em;height:6em;margin:.3em}
 .button{background:#fff;color:#000}
 footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#424242;color:#fff}

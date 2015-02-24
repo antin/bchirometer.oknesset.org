@@ -1,3 +1,6 @@
 # Editor backups.
 *~
 *.bak
+
+# Rsync exclusions: for efficient upgrading of deployments.
+.git/
