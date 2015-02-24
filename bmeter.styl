@@ -14,12 +14,14 @@ a
 	header li &
 		color inherit
 body
-	max-width 30em
+	max-width 28em
 	margin 4em auto
 	background white
 	color black
 	font-family Alef,sans-serif
 	overflow-y scroll //??? Replace with nicer, JS-based, scrollbar, eg: perfectscrollbar.js.
+button
+	background white
 button
 footer a
 header a
@@ -31,6 +33,7 @@ header a
 	text-align center
 	text-decoration inherit
 	border none
+	border-radius 0.3em
 	outline none
 	box-sizing border-box
 	&.fa::before
@@ -45,7 +48,7 @@ footer a
 #categories-list a
 	width 8em
 	height 6em
-	margin 0.5em
+	margin 0.3em
 .button
 	background white
 	color black
@@ -63,10 +66,15 @@ footer
 	bottom 0
 	top inherit
 	background darkblueish
+	border-top solid medium white
+h1
+	font-size 3em
 h1
 h2
 	margin 1rem auto
 	text-align center
+h3
+	margin 2rem 0 0
 h4
 p
 	margin 0.5em 0
