@@ -38,7 +38,8 @@ header a
 	box-sizing border-box
 	&.fa::before
 		padding-left 0.5em
-	#agendas-list &
+	#agendas-list &,
+	#splash &
 		display inline-block
 	#splash>:not(footer) &
 		background white
@@ -100,10 +101,15 @@ ol
 		text-align center
 	>li
 		display inline-block
+		#parties-list & //???
+			display block
+			text-align start
 section
 	display none
 [disabled]
 	background disabled
+[hidden]
+	display none
 .agree
 	border greenish solid medium
 	&.selected

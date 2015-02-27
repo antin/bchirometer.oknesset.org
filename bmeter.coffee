@@ -42,6 +42,7 @@ $ ->
 	# Populate categories and agendas from constant JS?!
 	$('#categories-list').html _.template $('#category-template').html(),{categories}
 	$('#agendas-list').html _.template $('#agenda-template').html(),{agendas}
+	$('#parties-list').html _.template $('#party-template').html(),{parties}
 
 	# Button handlers.
 	$ '#agendas'

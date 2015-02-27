@@ -51,6 +51,9 @@
     $('#agendas-list').html(_.template($('#agenda-template').html(), {
       agendas: agendas
     }));
+    $('#parties-list').html(_.template($('#party-template').html(), {
+      parties: parties
+    }));
     return $('#agendas').on('click', 'button', function(ev) {
       var b, v;
       b = $(ev.target);

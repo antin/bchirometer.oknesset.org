@@ -3,7 +3,7 @@ body{max-width:28em;margin:4em auto;background:#fff;color:#000;font-family:Alef,
 button{background:#fff}
 button,footer a,header a,.button{display:block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
 button.fa::before,footer a.fa::before,header a.fa::before,.button.fa::before{padding-left:.5em}
-#agendas-list button,#agendas-list footer a,#agendas-list header a,#agendas-list .button{display:inline-block}
+#agendas-list button,#agendas-list footer a,#agendas-list header a,#agendas-list .button,#splash button,#splash footer a,#splash header a,#splash .button{display:inline-block}
 #splash>:not(footer) button,#splash>:not(footer) footer a,#splash>:not(footer) header a,#splash>:not(footer) .button{background:#fff;color:#4c3dcc}
 footer a,#categories-list a,#about .button,#qna .button{background:#4c3dcc;color:#fff}
 #categories-list a{width:8em;height:6em;margin:.3em}
@@ -19,9 +19,11 @@ header ol{margin:0}
 header a{text-decoration:inherit}
 header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center}
-ol >li{display:inline-block}
+ol >li{display:inline-block;}
+#parties-list ol >li{display:block;text-align:start}
 section{display:none}
 [disabled]{background:#c7c2f7}
+[hidden]{display:none}
 .agree{border:#009b42 solid medium;}
 .agree.selected{background:#009b42}
 .disagree{border:#f95554 solid medium;}
