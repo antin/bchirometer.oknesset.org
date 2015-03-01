@@ -41,11 +41,11 @@ $ ->
 
 	# Populate categories and agendas from constant JS?! No, write const HTML, not JSON!
 	#??? $('#categories-list').html _.template $('#category-template').html(),{categories}
-	$('#agendas-list').html _.template $('#agenda-template').html(),{agendas}
+	#??? $('#agendas-list').html _.template $('#agenda-template').html(),{agendas}
 	#??? $('#parties-list').html _.template $('#party-template').html(),{parties}
 
 	# Button handlers.
-	$ '#agendas'
+	$ '#agendas-list'
 	.on 'click','button',(ev)->
 		b=$ ev.target # Which button?
 		v=switch # Vote?
@@ -55,5 +55,11 @@ $ ->
 		console.log 'Voted',v,'on',b.parent().attr 'id'
 		b.addClass 'selected'
 		.siblings().removeClass 'selected'
+
+	# Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
+	$ '#agendas-list button'
+	.removeClass 'selected'
+	.filter '.indifferent'
+	.addClass 'selected'
 
 	#???...

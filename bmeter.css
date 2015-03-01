@@ -34,11 +34,11 @@ section{display:none}
 .indifferent.selected{background:#f9c400}
 .we-are{background:#000}
 .splash{background:#604dff;color:#fff}
+#agendas h2 i{padding-left:.5em}
 #agendas-list>li{width:100%;text-align:start}
 #parties-list span{display:inline-block;width:3em}
 #splash{text-align:center}
 @font-face{font-family:'Alef';font-weight:bold;font-style:normal;src:url("https://oknesset.org/static/font/Alef-bold.eot");src:url("https://oknesset.org/static/font/Alef-bold.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-bold.woff") format('woff'),url("https://oknesset.org/static/font/Alef-bold.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-bold.svg#alefbold") format('svg')}
 @font-face{font-family:'Alef';font-weight:normal;font-style:normal;src:url("https://oknesset.org/static/font/Alef-regular.eot");src:url("https://oknesset.org/static/font/Alef-regular.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-regular.woff") format('woff'),url("https://oknesset.org/static/font/Alef-regular.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-regular.svg#alefregular") format('svg')}
-.fa{font:inherit}
 .fa::before{font-family:FontAwesome;}
 #categories-list .fa::before{display:block;padding-left:0}

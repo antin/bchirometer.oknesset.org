@@ -45,10 +45,7 @@
       return show_page('#splash');
     });
     page.start();
-    $('#agendas-list').html(_.template($('#agenda-template').html(), {
-      agendas: agendas
-    }));
-    return $('#agendas').on('click', 'button', function(ev) {
+    $('#agendas-list').on('click', 'button', function(ev) {
       var b, v;
       b = $(ev.target);
       v = (function() {
@@ -64,6 +61,7 @@
       console.log('Voted', v, 'on', b.parent().attr('id'));
       return b.addClass('selected').siblings().removeClass('selected');
     });
+    return $('#agendas-list button').removeClass('selected').filter('.indifferent').addClass('selected');
   });
 
 }).call(this);

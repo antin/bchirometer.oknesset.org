@@ -135,6 +135,8 @@ section
 .splash
 	background blueish
 	color white
+#agendas h2 i
+	padding-left 0.5em
 #agendas-list>li
 	width 100%
 	text-align start
@@ -162,8 +164,9 @@ section
 	src url(https://oknesset.org/static/font/Alef-regular.eot?#iefix) format('embedded-opentype'), url(https://oknesset.org/static/font/Alef-regular.woff) format('woff'), url(https://oknesset.org/static/font/Alef-regular.ttf) format('truetype'), url(https://oknesset.org/static/font/Alef-regular.svg#alefregular) format('svg')
 
 // Fix FontAwesome's messing up our line-height.
-.fa
-	font inherit
+/*??? .fa
+	font inherit !important
+*/
 .fa::before
 	font-family FontAwesome
 	#categories-list &
