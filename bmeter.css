@@ -17,10 +17,12 @@ h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word}
 header{top:0;}
 header ol{margin:0}
 header a{text-decoration:inherit}
+#parties-list img{background:#808080;display:block;width:18em;height:4em;margin-right:3em}
+li{display:inline-block;}
+#parties-list li{display:block}
 header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center}
-ol >li{display:inline-block;}
-#parties-list ol >li{display:block;text-align:start}
+ol#parties-list{text-align:start}
 section{display:none}
 [disabled]{background:#c7c2f7}
 [hidden]{display:none}
@@ -30,8 +32,10 @@ section{display:none}
 .disagree.selected{background:#f95554}
 .indifferent{border:#f9c400 solid medium;}
 .indifferent.selected{background:#f9c400}
+.we-are{background:#000}
 .splash{background:#604dff;color:#fff}
 #agendas-list>li{width:100%;text-align:start}
+#parties-list span{display:inline-block;width:3em}
 #splash{text-align:center}
 @font-face{font-family:'Alef';font-weight:bold;font-style:normal;src:url("https://oknesset.org/static/font/Alef-bold.eot");src:url("https://oknesset.org/static/font/Alef-bold.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-bold.woff") format('woff'),url("https://oknesset.org/static/font/Alef-bold.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-bold.svg#alefbold") format('svg')}
 @font-face{font-family:'Alef';font-weight:normal;font-style:normal;src:url("https://oknesset.org/static/font/Alef-regular.eot");src:url("https://oknesset.org/static/font/Alef-regular.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-regular.woff") format('woff'),url("https://oknesset.org/static/font/Alef-regular.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-regular.svg#alefregular") format('svg')}

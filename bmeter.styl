@@ -91,6 +91,17 @@ header
 		margin 0
 	a
 		text-decoration inherit
+img
+	#parties-list &
+		background gray //??? Temporary hack, because missing images.
+		display block
+		width 18em
+		height 4em
+		margin-right 3em //??? Yuck.
+li
+	display inline-block
+	#parties-list &
+		display block
 ol
 	header>&
 		list-style none
@@ -99,11 +110,8 @@ ol
 		margin 0 auto
 		padding 0
 		text-align center
-	>li
-		display inline-block
-		#parties-list & //???
-			display block
-			text-align start
+	&#parties-list //???
+		text-align start
 section
 	display none
 [disabled]
@@ -122,12 +130,17 @@ section
 	border yellowish solid medium
 	&.selected
 		background yellowish
+.we-are
+	background black
 .splash
 	background blueish
 	color white
 #agendas-list>li
 	width 100%
 	text-align start
+#parties-list span
+	display inline-block
+	width 3em
 #splash
 	text-align center
 

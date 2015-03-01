@@ -39,10 +39,10 @@ $ ->
 	page '',->show_page '#splash' # Root page (or index.html?), take us "home".
 	page.start() # Begin listening to location changes.
 
-	# Populate categories and agendas from constant JS?!
-	$('#categories-list').html _.template $('#category-template').html(),{categories}
+	# Populate categories and agendas from constant JS?! No, write const HTML, not JSON!
+	#??? $('#categories-list').html _.template $('#category-template').html(),{categories}
 	$('#agendas-list').html _.template $('#agenda-template').html(),{agendas}
-	$('#parties-list').html _.template $('#party-template').html(),{parties}
+	#??? $('#parties-list').html _.template $('#party-template').html(),{parties}
 
 	# Button handlers.
 	$ '#agendas'

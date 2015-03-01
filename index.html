@@ -38,8 +38,8 @@
 	<section id="about">
 		<h2>אודות בחירומטר 2015</h2>
 		<ol class="we-are">
-		<li><a class="oknesset" href="http://oknesset.org/" target="_blank"></a></li>
-		<li><a class="mitpakdim" href="http://mitpakdim.co.il/" target="_blank"></a></li>
+		<li><a class="oknesset" href="http://oknesset.org/" target="_blank"><img src="oknesset_header_icon.png"></a></li>
+		<li><a class="mitpakdim" href="http://mitpakdim.co.il/" target="_blank"><img src="mitpakdim_header_icon.png"></a></li>
 		</ol>
 		<p>הבחירומטר הינו כלי ותוצר פיתוח משותף של ארגון מתפקדים ועמותת הסדנא לידע ציבורי, שהן עמותות מתנדבים ללא כל שיוך מפלגתי או נטייה פוליטית. מטרותיהן של עמותות אלה הן שיתוף והנגשת מידע ציבורי וחיזוק הקשר בין רצון הבוחר לפעילות הנבחרים, לחיזוקה של הדמוקרטיה הישראלית.
 		<br>
@@ -185,7 +185,20 @@
 	<section id="categories">
 		<h2>איזה נושא הכי בוער לך?</h2>
 		<p>פה יבוא הסבר ממש קצר של כמה שורות. לא צריץ לבלבל את המוח.</p>
-<ol id="categories-list"></ol>
+<ol id="categories-list">
+<li><a class="button fa fa-user-secret" href="agendas#[115]">בטחון פנים</a></li
+><li><a class="button fa fa-money" href="agendas#[92,113,101]">כלכלה</a></li
+><li><a class="button fa fa-bars" href="agendas#[108,107]">הגירה וגבולות</a></li
+><li><a class="button fa fa-binoculars" href="agendas#[99]">שקיפות</a></li
+><li><a class="button fa fa-bus" href="agendas#[102]">תחבורה ציבורית</a></li
+><li><a class="button fa fa-user" href="agendas#[104]">מיעוטים</a></li
+><li><a class="button fa fa-umbrella" href="agendas#[119]">פנסיה</a></li
+><li><a class="button fa fa-users" href="agendas#[105]">זכויות אדם</a></li
+><li><a class="button fa fa-female" href="agendas#[106,122,117]">מגדר</a></li
+><li><a class="button fa fa-book" href="agendas#[109]">חינוך</a></li
+><li><a class="button fa fa-tree" href="agendas#[114]">איכות הסביבה</a></li
+><li><a class="button fa fa-paw" href="agendas#[103]">זכויות בעלי חיים</a></li>
+</ol>
 		<footer>
 			<ol>
 			<li><a href="results">די, תראו לי את התוצאות</a></li>
@@ -205,7 +218,48 @@
 	</section>
 
 	<section id="results">
-<ol id="parties-list"></ol>
+<ol id="parties-list">
+<li id="party-15">
+	<h3><span>+53</span><a href="http://oknesset.org/party/15/">יש עתיד</a></h3>
+	<img src="">
+</li><li id="party-14">
+	<h3><span>+53</span><a href="http://oknesset.org/party/14/">הליכוד</a></h3>
+	<img src="">
+</li><li id="party-16">
+	<h3><span>+53</span><a href="http://oknesset.org/party/16/">העבודה</a></h3>
+	<img src="">
+</li><li id="party-26">
+	<h3><span>+53</span><a href="http://oknesset.org/party/26/">ישראל ביתנו</a></h3>
+	<img src="">
+</li><li id="party-17">
+	<h3><span>+53</span><a href="http://oknesset.org/party/17/">הבית היהודי</a></h3>
+	<img src="">
+</li><li id="party-18">
+	<h3><span>+53</span><a href="http://oknesset.org/party/18/">ש”ס</a></h3>
+	<img src="">
+</li><li id="party-19">
+	<h3><span>+53</span><a href="http://oknesset.org/party/19/">יהדות התורה</a></h3>
+	<img src="">
+</li><li id="party-21">
+	<h3><span>+53</span><a href="http://oknesset.org/party/21/">התנועה</a></h3>
+	<img src="">
+</li><li id="party-20">
+	<h3><span>+53</span><a href="http://oknesset.org/party/20/">מרצ</a></h3>
+	<img src="">
+</li><li id="party-23">
+	<h3><span>+53</span><a href="http://oknesset.org/party/23/"> רע”מ-תע”ל</a></h3>
+	<img src="">
+</li><li id="party-22">
+	<h3><span>+53</span><a href="http://oknesset.org/party/22/">חזית דמוקרטית לשלום ושוויון</a></h3>
+	<img src="">
+</li><li id="party-24">
+	<h3><span>+53</span><a href="http://oknesset.org/party/24/">ברית לאומית דמוקרטית</a></h3>
+	<img src="">
+</li><li id="party-25">
+	<h3><span>+53</span><a href="http://oknesset.org/party/25/">קדימה</a></h3>
+	<img src="">
+</li>
+</ol>
 		<footer>
 			<ol>
 			<li>שיתוף התוצאות:</li>
@@ -239,10 +293,8 @@
 <script type="text/html" id="party-template">
 <%_.each(parties,function(e){
 %><li id="party-<%-e.id%>">
-	 <h3><a href="http://oknesset.org<%-e.absolute_url%>"><%-e.name%></a></h3>
-<!--
-	 <img src="<%-e.logo%>">
--->
+	<h3><span>+53</span><a href="http://oknesset.org<%-e.absolute_url%>"><%-e.name%></a></h3>
+	<img src="<%-e.logo%>">
 </li><%
 })%>
 </script>
@@ -250,7 +302,7 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="lib/jquery-2.1.3.min.js">\x3c/script>');</script>
-<!--??? Fallback to …
+<!--??? Fallback to…
 <script src="lib/jquery-2.1.3.min.js"></script>
 -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
