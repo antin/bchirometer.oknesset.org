@@ -83,6 +83,10 @@
       disable_category();
       return hide_nav_to_results();
     });
+    $('.synopsis a').click(function(ev) {
+      ev.preventDefault();
+      return $(this).parents('li').children('h4,p').show();
+    });
 
     /*??? # Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
     	$ '#agendas-list button'

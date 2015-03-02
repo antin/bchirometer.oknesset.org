@@ -81,6 +81,14 @@ $ ->
 		# Update stuff depending on number of votes.
 		disable_category()
 		hide_nav_to_results()
+	# Synopsis expansion clicks.
+	$ '.synopsis a'
+	.click (ev)->
+		ev.preventDefault()
+		$ @
+		.parents 'li'
+		.children 'h4,p'
+		.show()
 
 	###??? # Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
 	$ '#agendas-list button'
