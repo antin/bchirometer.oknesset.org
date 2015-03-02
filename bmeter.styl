@@ -3,11 +3,13 @@
 blueish=#604dff
 darkblueish=#7290e0 //??? Was #4c3dcc, but Irit doesn't like it.
 darkgrayish=#424242
-disabled=#aec1f5 //??? Was #c7c2f7
+pale=#aec1f5 //??? Was #c7c2f7
 grayish=#c7c2f7
 greenish=#009b42
 redish=#f95554
 yellowish=#f9c400
+facebookcolor=#4466a3
+twittercolor=#98e2fd
 // Layouts and stuff.
 a
 	footer li &,
@@ -55,7 +57,7 @@ footer a
 	height 6em
 	margin 0.3em
 	&.has-votes
-		background disabled //??? rename this const!
+		background pale //??? rename this const!
 .button
 	background white
 	color black
@@ -74,6 +76,22 @@ footer
 	top inherit
 	background darkblueish
 	border-top solid medium white
+	#agendas &,
+	#categories &
+		background white
+		a
+			background #e8e860
+			color black
+	#results &
+		height inherit
+		background #e8e860
+		color black
+		a
+			font-size 1.5em
+			padding 0
+		a
+		ol
+			background white
 h1
 	font-size 3em
 h1
@@ -81,12 +99,17 @@ h2
 	margin 1rem auto
 	text-align center
 h3
-	margin 2rem 0 0
+	margin 1.5rem 0 0
 h4
 p
 	margin 0.5em 0
 	font-weight normal
 	word-wrap break-word
+	#agendas &
+		display none //??? Hidden initially; put [hidden] attribute in HTML instead?
+		&.synopsis
+			display block
+			margin 2em 0
 header
 	top 0
 	ol
@@ -97,9 +120,9 @@ img
 	#parties-list &
 		background gray //??? Temporary hack, because missing images.
 		display block
-		width 18em
-		height 4em
-		margin-right 3em //??? Yuck.
+		width 9em
+		height 2em
+		//???margin-right 3em //??? Yuck.
 li
 	display inline-block
 	#parties-list &
@@ -114,6 +137,8 @@ ol
 		text-align center
 	&#parties-list //???
 		text-align start
+		border  solid medium #604dff
+		padding 1em
 section
 	display none
 [hidden]
@@ -135,6 +160,10 @@ section
 .splash
 	background blueish
 	color white
+#agendas>button
+	float left
+	background pale
+	color black
 #agendas h2 i
 	padding-left 0.5em
 #agendas-list>li

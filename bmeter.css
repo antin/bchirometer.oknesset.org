@@ -10,20 +10,27 @@ footer a,#categories-list a,#about .button,#qna .button{background:#7290e0;color
 #categories-list a.has-votes{background:#aec1f5}
 .button{background:#fff;color:#000}
 footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#424242;color:#fff}
-footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff}
+footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff;}
+#agendas footer,#categories footer{background:#fff;}
+#agendas footer a,#categories footer a{background:#e8e860;color:#000}
+#results footer{height:inherit;background:#e8e860;color:#000;}
+#results footer a{font-size:1.5em;padding:0}
+#results footer a,#results footer ol{background:#fff}
 h1{font-size:3em}
 h1,h2{margin:1rem auto;text-align:center}
-h3{margin:2rem 0 0}
-h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word}
+h3{margin:1.5rem 0 0}
+h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
+#agendas h4,#agendas p{display:none;}
+#agendas h4.synopsis,#agendas p.synopsis{display:block;margin:2em 0}
 header{top:0;}
 header ol{margin:0}
 header a{text-decoration:inherit}
-#parties-list img{background:#808080;display:block;width:18em;height:4em;margin-right:3em}
+#parties-list img{background:#808080;display:block;width:9em;height:2em}
 li{display:inline-block;}
 #parties-list li{display:block}
 header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center}
-ol#parties-list{text-align:start}
+ol#parties-list{text-align:start;border:solid medium #604dff;padding:1em}
 section{display:none}
 [hidden]{display:none}
 .agree{border:#009b42 solid medium;}
@@ -34,6 +41,7 @@ section{display:none}
 .indifferent.selected{background:#f9c400}
 .we-are{background:#000}
 .splash{background:#604dff;color:#fff}
+#agendas>button{float:left;background:#aec1f5;color:#000}
 #agendas h2 i{padding-left:.5em}
 #agendas-list>li{width:100%;text-align:start}
 #parties-list span{display:inline-block;width:3em}
