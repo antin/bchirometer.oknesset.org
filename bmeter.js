@@ -3,7 +3,7 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var hide_nav_to_results, page_turner, show_page;
+    var disable_category, hide_nav_to_results, page_turner, show_page;
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').toggleClass('splash', p === '#splash');
@@ -52,8 +52,14 @@
     hide_nav_to_results = function() {
       return $('#agendas footer,#categories footer').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
     };
+    disable_category = function() {
+      var cid, voted;
+      voted = $('#agendas button.selected:visible:not(.indifferent)').length;
+      cid = location.pathname + location.hash;
+      return $('#categories a[href="' + cid + '"]').toggleClass('has-votes', voted !== 0);
+    };
     $('#agendas-list').on('click', 'button', function(ev) {
-      var b, cid, v, voted;
+      var b, v;
       b = $(ev.target);
       v = (function() {
         switch (false) {
@@ -67,24 +73,24 @@
       })();
       console.log('Voted', v, 'on', b.parent().attr('id'));
       b.addClass('selected').siblings().removeClass('selected');
-      voted = $('#agendas button.selected:visible:not(.indifferent)').length;
-      cid = location.pathname + location.hash;
-      $('#categories a[href="' + cid + '"]').toggleClass('has-votes', voted !== 0);
+      disable_category();
       return hide_nav_to_results();
     });
     $('#cancel').click(function(ev) {
       $('#agendas button.selected:visible:not(.indifferent)').each(function() {
         return $(this).removeClass('selected').siblings('.indifferent').addClass('selected');
       });
+      disable_category();
       return hide_nav_to_results();
     });
-    $('#agendas-list button').removeClass('selected').filter('.indifferent').addClass('selected');
-    return hide_nav_to_results();
 
-    /*???
-    	$ '#agendas footer,#categories footer'
-    	.hide()
+    /*??? # Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
+    	$ '#agendas-list button'
+    	.removeClass 'selected'
+    	.filter '.indifferent'
+    	.addClass 'selected'
      */
+    return hide_nav_to_results();
   });
 
 }).call(this);

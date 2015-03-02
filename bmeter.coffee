@@ -49,8 +49,13 @@ $ ->
 		# Hide nav to results (entire footer) if no votes.
 		$ '#agendas footer,#categories footer'
 		.toggle $('#agendas button.selected:not(.indifferent)').length isnt 0
+	disable_category=->
+		# Mark category to indicate whether votes done in it.
+		voted=$('#agendas button.selected:visible:not(.indifferent)').length #???... find any dis/agree votes on this category/page: $ :visible and .dis/agree
+		cid=location.pathname+location.hash # Identify current category.
+		$('#categories a[href="'+cid+'"]').toggleClass 'has-votes',voted isnt 0
 
-	# Button handlers.
+	# Voting buttons handler.
 	$ '#agendas-list'
 	.on 'click','button',(ev)->
 		b=$ ev.target # Which button?
@@ -61,13 +66,10 @@ $ ->
 		console.log 'Voted',v,'on',b.parent().attr 'id'
 		b.addClass 'selected'
 		.siblings().removeClass 'selected'
-		# Mark category to indicate whether votes done in it.
-		voted=$('#agendas button.selected:visible:not(.indifferent)').length #???... find any dis/agree votes on this category/page: $ :visible and .dis/agree
-		cid=location.pathname+location.hash # Identify current category.
-		#???... tag cat button
-		$('#categories a[href="'+cid+'"]').toggleClass 'has-votes',voted isnt 0
+		# Update stuff depending on number of votes.
+		disable_category()
 		hide_nav_to_results()
-
+	# Cancel votes button handler.
 	$ '#cancel'
 	.click (ev)->
 		$ '#agendas button.selected:visible:not(.indifferent)'
@@ -76,19 +78,18 @@ $ ->
 			.removeClass 'selected'
 			.siblings '.indifferent'
 			.addClass 'selected'
+		# Update stuff depending on number of votes.
+		disable_category()
 		hide_nav_to_results()
 
-	# Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
+	###??? # Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
 	$ '#agendas-list button'
 	.removeClass 'selected'
 	.filter '.indifferent'
 	.addClass 'selected'
+	###
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	hide_nav_to_results()
-	###???
-	$ '#agendas footer,#categories footer'
-	.hide()
-	###
 
 	#???...
