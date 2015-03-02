@@ -1,6 +1,6 @@
 footer li a,header li a{color:inherit}
 body{max-width:28em;margin:4em auto;background:#fff;color:#000;font-family:Alef,sans-serif;overflow-y:scroll}
-button{background:#fff}
+button{background:#fff;font-family:inherit}
 button,footer a,header a,.button{display:block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
 button.fa::before,footer a.fa::before,header a.fa::before,.button.fa::before{padding-left:.5em}
 #agendas-list button,#agendas-list footer a,#agendas-list header a,#agendas-list .button,#splash button,#splash footer a,#splash header a,#splash .button{display:inline-block}
@@ -41,8 +41,8 @@ section{display:none}
 .indifferent.selected{background:#f9c400}
 .we-are{background:#000}
 .splash{background:#604dff;color:#fff}
-#agendas{margin-bottom:7em}
-#agendas>button{float:left;background:#aec1f5;color:#000}
+#agendas,#results{margin-bottom:7em}
+#agendas>button,#agendas>.button{float:left;background:#aec1f5;color:#000}
 #agendas h2 i{padding-left:.5em}
 #agendas-list>li{width:100%;text-align:start}
 #parties-list span{display:inline-block;width:3em}

@@ -22,8 +22,9 @@ body
 	color black
 	font-family Alef,sans-serif
 	overflow-y scroll //??? Replace with nicer, JS-based, scrollbar, eg: perfectscrollbar.js.
-button
+button // Reset browser's defaults.
 	background white
+	font-family inherit
 button
 footer a
 header a
@@ -162,8 +163,10 @@ section
 	background blueish
 	color white
 #agendas
+#results
 	margin-bottom 7em
-#agendas>button
+#agendas>button,
+#agendas>.button
 	float left
 	background pale
 	color black

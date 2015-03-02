@@ -45,6 +45,11 @@ $ ->
 	#??? $('#agendas-list').html _.template $('#agenda-template').html(),{agendas}
 	#??? $('#parties-list').html _.template $('#party-template').html(),{parties}
 
+	hide_nav_to_results=->
+		# Hide nav to results (entire footer) if no votes.
+		$ '#agendas footer,#categories footer'
+		.toggle $('#agendas button.selected:not(.indifferent)').length isnt 0
+
 	# Button handlers.
 	$ '#agendas-list'
 	.on 'click','button',(ev)->
@@ -58,15 +63,32 @@ $ ->
 		.siblings().removeClass 'selected'
 		# Mark category to indicate whether votes done in it.
 		voted=$('#agendas button.selected:visible:not(.indifferent)').length #???... find any dis/agree votes on this category/page: $ :visible and .dis/agree
-		#???... identify category
-		h=location.pathname+location.hash
+		cid=location.pathname+location.hash # Identify current category.
 		#???... tag cat button
-		$('#categories a[href="'+h+'"]').toggleClass 'has-votes',voted isnt 0
+		$('#categories a[href="'+cid+'"]').toggleClass 'has-votes',voted isnt 0
+		hide_nav_to_results()
+
+	$ '#cancel'
+	.click (ev)->
+		$ '#agendas button.selected:visible:not(.indifferent)'
+		.each ->
+			$ @
+			.removeClass 'selected'
+			.siblings '.indifferent'
+			.addClass 'selected'
+		hide_nav_to_results()
 
 	# Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
 	$ '#agendas-list button'
 	.removeClass 'selected'
 	.filter '.indifferent'
 	.addClass 'selected'
+
+	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
+	hide_nav_to_results()
+	###???
+	$ '#agendas footer,#categories footer'
+	.hide()
+	###
 
 	#???...

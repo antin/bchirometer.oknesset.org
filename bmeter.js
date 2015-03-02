@@ -3,7 +3,7 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   $(function() {
-    var page_turner, show_page;
+    var hide_nav_to_results, page_turner, show_page;
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').toggleClass('splash', p === '#splash');
@@ -49,8 +49,11 @@
       return show_page('#splash');
     });
     page.start();
+    hide_nav_to_results = function() {
+      return $('#agendas footer,#categories footer').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
+    };
     $('#agendas-list').on('click', 'button', function(ev) {
-      var b, h, v, voted;
+      var b, cid, v, voted;
       b = $(ev.target);
       v = (function() {
         switch (false) {
@@ -65,10 +68,23 @@
       console.log('Voted', v, 'on', b.parent().attr('id'));
       b.addClass('selected').siblings().removeClass('selected');
       voted = $('#agendas button.selected:visible:not(.indifferent)').length;
-      h = location.pathname + location.hash;
-      return $('#categories a[href="' + h + '"]').toggleClass('has-votes', voted !== 0);
+      cid = location.pathname + location.hash;
+      $('#categories a[href="' + cid + '"]').toggleClass('has-votes', voted !== 0);
+      return hide_nav_to_results();
     });
-    return $('#agendas-list button').removeClass('selected').filter('.indifferent').addClass('selected');
+    $('#cancel').click(function(ev) {
+      $('#agendas button.selected:visible:not(.indifferent)').each(function() {
+        return $(this).removeClass('selected').siblings('.indifferent').addClass('selected');
+      });
+      return hide_nav_to_results();
+    });
+    $('#agendas-list button').removeClass('selected').filter('.indifferent').addClass('selected');
+    return hide_nav_to_results();
+
+    /*???
+    	$ '#agendas footer,#categories footer'
+    	.hide()
+     */
   });
 
 }).call(this);

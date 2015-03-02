@@ -6,7 +6,7 @@
 
 ## בפיתוח הבחירומטר השתתפו:
 תורמים:
-- Microfinanace
+- Microfinance
 
 "מתפקדים":
 - יותם הרחול - מוביל פרויקט
@@ -30,3 +30,7 @@ Compile assets -- CoffeeScript to JS and Stylus to CSS -- before deploying, or c
 Add "--watch" to either or both to put them into a loop, listening for changes.
 
 Cf NPM packages [coffee-script](https://www.npmjs.org/package/coffee-script) and [stylus](https://www.npmjs.org/package/stylus).
+
+# Staging site
+
+See [http://bmeter.decodecode.net/].
