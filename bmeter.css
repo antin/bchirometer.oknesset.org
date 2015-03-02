@@ -29,7 +29,7 @@ header a{text-decoration:inherit}
 li{display:inline-block;}
 #parties-list li{display:block}
 header>ol{list-style:none}
-footer>ol,section>ol{margin:0 auto;padding:0;text-align:center}
+footer>ol,section>ol{margin:0 auto;padding:0;text-align:center;clear:both}
 ol#parties-list{text-align:start;border:solid medium #604dff;padding:1em}
 section{display:none}
 [hidden]{display:none}
@@ -41,6 +41,7 @@ section{display:none}
 .indifferent.selected{background:#f9c400}
 .we-are{background:#000}
 .splash{background:#604dff;color:#fff}
+#agendas{margin-bottom:7em}
 #agendas>button{float:left;background:#aec1f5;color:#000}
 #agendas h2 i{padding-left:.5em}
 #agendas-list>li{width:100%;text-align:start}
