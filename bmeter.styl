@@ -3,7 +3,7 @@
 blueish=#604dff
 darkblueish=#7290e0 //??? Was #4c3dcc, but Irit doesn't like it.
 darkgrayish=#424242
-disabled=#c7c2f7
+disabled=#aec1f5 //??? Was #c7c2f7
 grayish=#c7c2f7
 greenish=#009b42
 redish=#f95554
@@ -54,6 +54,8 @@ footer a
 	width 8em
 	height 6em
 	margin 0.3em
+	&.has-votes
+		background disabled //??? rename this const!
 .button
 	background white
 	color black
@@ -114,8 +116,6 @@ ol
 		text-align start
 section
 	display none
-[disabled]
-	background disabled
 [hidden]
 	display none
 .agree
@@ -172,6 +172,7 @@ section
 */
 .fa
 	padding-left 0.5em
+.fa::before
 	#categories-list &
 		display block
 		padding-left 0

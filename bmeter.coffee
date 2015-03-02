@@ -12,9 +12,10 @@ $ ->
 	page 'agendas',(context)->
 		# (Apparently, window.location is updated after this handler, so can't get URL hash from it. Page.js provides details in a "context" parameter.)
 		cid=context.hash # Gives just the URL fragment, without "#" prefix.
-		# Disable chosen category??? Meh, bad UX, probably.
+		###??? # Disable chosen category??? Meh, bad UX, probably.
 		$ "[href=\"agendas##{cid}\"]"
 		.prop 'disabled',true
+		###
 		# Identify category from URL and fetch details; eg "agendas#[92,113,101]" means category includes agendas 92, 113, and 101.
 		c=_.find categories,(c)->cid is JSON.stringify c.id
 		c or= # Failsafe?
@@ -55,6 +56,12 @@ $ ->
 		console.log 'Voted',v,'on',b.parent().attr 'id'
 		b.addClass 'selected'
 		.siblings().removeClass 'selected'
+		# Mark category to indicate whether votes done in it.
+		voted=$('#agendas button.selected:visible:not(.indifferent)').length #???... find any dis/agree votes on this category/page: $ :visible and .dis/agree
+		#???... identify category
+		h=location.pathname+location.hash
+		#???... tag cat button
+		$('#categories a[href="'+h+'"]').toggleClass 'has-votes',voted isnt 0
 
 	# Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
 	$ '#agendas-list button'

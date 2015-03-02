@@ -21,7 +21,11 @@
     page('agendas', function(context) {
       var c, cid, showall;
       cid = context.hash;
-      $("[href=\"agendas#" + cid + "\"]").prop('disabled', true);
+
+      /*??? # Disable chosen category??? Meh, bad UX, probably.
+      		$ "[href=\"agendas##{cid}\"]"
+      		.prop 'disabled',true
+       */
       c = _.find(categories, function(c) {
         return cid === JSON.stringify(c.id);
       });
@@ -46,7 +50,7 @@
     });
     page.start();
     $('#agendas-list').on('click', 'button', function(ev) {
-      var b, v;
+      var b, h, v, voted;
       b = $(ev.target);
       v = (function() {
         switch (false) {
@@ -59,7 +63,10 @@
         }
       })();
       console.log('Voted', v, 'on', b.parent().attr('id'));
-      return b.addClass('selected').siblings().removeClass('selected');
+      b.addClass('selected').siblings().removeClass('selected');
+      voted = $('#agendas button.selected:visible:not(.indifferent)').length;
+      h = location.pathname + location.hash;
+      return $('#categories a[href="' + h + '"]').toggleClass('has-votes', voted !== 0);
     });
     return $('#agendas-list button').removeClass('selected').filter('.indifferent').addClass('selected');
   });
