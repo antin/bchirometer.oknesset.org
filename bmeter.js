@@ -69,7 +69,7 @@
           return x + y;
         });
         average = sum / scores.length;
-        return $("#party-" + party).data('score', average).attr('scores', scores).find('h3 img').attr('src', 'score0.png').siblings('span').text(average.toFixed(1));
+        return $("#party-" + party).data('score', average).find('h3 img').attr('src', 'score0.png').siblings('span').text(average.toFixed(1)).attr('title', 'ממוצע של \u202d' + scores);
       };
       for (party in final) {
         if (!__hasProp.call(final, party)) continue;

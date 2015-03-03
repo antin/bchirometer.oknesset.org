@@ -55,14 +55,13 @@ $ ->
 			do (party,scores)->
 				sum=scores.reduce (x,y)->x+y
 				average=sum/scores.length
-				#average=if scores.length isnt 0 then total/scores.length else 0
 				$ "#party-#{party}"
 				.data 'score',average
-				.attr 'scores',scores #average.toString() # Just for debugging?
 				.find 'h3 img'
 				.attr 'src','score0.png'
 				.siblings 'span'
 				.text average.toFixed 1
+				.attr 'title','ממוצע של \u202d'+scores # Just for debugging?
 		r=$ '#parties-list'
 		p=r.children().get()
 		.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
@@ -78,15 +77,13 @@ $ ->
 
 	# Some routines definitions.
 	parse_score=(e)->parseFloat $(e).data().score or 0
-	#??? parse_score=(e)->parseFloat $(e).attr('score') or 0
 	hide_nav_to_results=->
 		# Hide nav to results (entire footer) if no votes.
 		$ '#agendas footer,#categories footer'
 		.toggle $('#agendas button.selected:not(.indifferent)').length isnt 0
 	disable_category=->
 		# Mark category to indicate whether votes done in it.
-		voted=$('#agendas button.selected:visible:not(.indifferent)').length #???... find any dis/agree votes on this category/page: $ :visible and .dis/agree
-		#cid=location.hash # Identify current category.
+		voted=$('#agendas button.selected:visible:not(.indifferent)').length # Find any dis/agree votes in current category.
 		$("#categories a[href=\"#{location.hash}\"]").toggleClass 'has-votes',voted isnt 0
 
 	# Voting buttons handler.
