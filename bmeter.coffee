@@ -28,10 +28,14 @@ $ ->
 			a.toggle parseInt(aid,10) in ids
 		show_page '#agendas'
 	page 'results',->
-		# Wipe old final scores.
+		# Wipe old final scores: reset to zeroes.
 		final={}
-		$ '#parties-list h3 span'
-		.text 0
+		$ '#parties-list li'
+		.data 'score',0
+		.find 'h3 img'
+		.attr 'src','score0.png'
+		.siblings 'span'
+		.text '—'
 		# Recalculate final scores.
 		$ '#agendas-list>li'
 		.each ->
@@ -49,28 +53,32 @@ $ ->
 		# Sort parties by score.
 		for own party,scores of final
 			do (party,scores)->
-				total=scores.reduce (x,y)->x+y
-				average=total/scores.length
+				sum=scores.reduce (x,y)->x+y
+				average=sum/scores.length
+				#average=if scores.length isnt 0 then total/scores.length else 0
 				$ "#party-#{party}"
-				.attr 'score',average
-				.find 'h3 span'
+				.data 'score',average
+				.attr 'scores',scores #average.toString() # Just for debugging?
+				.find 'h3 img'
+				.attr 'src','score0.png'
+				.siblings 'span'
 				.text average.toFixed 1
-			#??? parseInt a,10
 		r=$ '#parties-list'
 		p=r.children().get()
-		p.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
+		.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
 		r.append p
 		# Count votes.
 		$ '#results>p span'
 		.text $('#agendas button.selected:not(.indifferent)').length
 		# Only show best result's logo.
-		$('#parties-list img').hide().first().show()
+		$('#parties-list li>img').hide().first().show()
 		show_page '#results'
 	page '*',->show_page '#splash' # Root page (or index.html?), or anything else — take us "home".
 	page.start hashbang:yes # Begin listening to location changes.
 
 	# Some routines definitions.
-	parse_score=(e)->parseFloat $(e).attr('score') or 0
+	parse_score=(e)->parseFloat $(e).data().score or 0
+	#??? parse_score=(e)->parseFloat $(e).attr('score') or 0
 	hide_nav_to_results=->
 		# Hide nav to results (entire footer) if no votes.
 		$ '#agendas footer,#categories footer'
@@ -78,8 +86,8 @@ $ ->
 	disable_category=->
 		# Mark category to indicate whether votes done in it.
 		voted=$('#agendas button.selected:visible:not(.indifferent)').length #???... find any dis/agree votes on this category/page: $ :visible and .dis/agree
-		cid=location.pathname+location.hash # Identify current category.
-		$('#categories a[href="'+cid+'"]').toggleClass 'has-votes',voted isnt 0
+		#cid=location.hash # Identify current category.
+		$("#categories a[href=\"#{location.hash}\"]").toggleClass 'has-votes',voted isnt 0
 
 	# Voting buttons handler.
 	$ '#agendas-list'

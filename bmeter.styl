@@ -111,6 +111,8 @@ p
 		&.synopsis
 			display block
 			margin 2em 0
+			& a:after
+				content " (לפרטים)"
 header
 	top 0
 	ol
@@ -174,10 +176,15 @@ section
 #agendas-list>li
 	width 100%
 	text-align start
-#parties-list span
-	display inline-block
-	width 4em
-	direction ltr
+#parties-list h3
+	img
+		float left
+		height 1em
+		width 2em
+	span
+		display inline-block
+		width 4em
+		direction ltr
 #splash
 	text-align center
 

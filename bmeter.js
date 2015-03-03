@@ -37,7 +37,7 @@
     page('results', function() {
       var final, p, party, r, scores, _fn;
       final = {};
-      $('#parties-list h3 span').text(0);
+      $('#parties-list li').data('score', 0).find('h3 img').attr('src', 'score0.png').siblings('span').text('—');
       $('#agendas-list>li').each(function() {
         var a, dis_agree, party, ps, score, _results;
         a = $(this);
@@ -64,12 +64,12 @@
         }
       });
       _fn = function(party, scores) {
-        var average, total;
-        total = scores.reduce(function(x, y) {
+        var average, sum;
+        sum = scores.reduce(function(x, y) {
           return x + y;
         });
-        average = total / scores.length;
-        return $("#party-" + party).attr('score', average).find('h3 span').text(average.toFixed(1));
+        average = sum / scores.length;
+        return $("#party-" + party).data('score', average).attr('scores', scores).find('h3 img').attr('src', 'score0.png').siblings('span').text(average.toFixed(1));
       };
       for (party in final) {
         if (!__hasProp.call(final, party)) continue;
@@ -77,8 +77,7 @@
         _fn(party, scores);
       }
       r = $('#parties-list');
-      p = r.children().get();
-      p.sort(function(x, y) {
+      p = r.children().get().sort(function(x, y) {
         if ((parse_score(x)) < (parse_score(y))) {
           return 1;
         } else {
@@ -87,7 +86,7 @@
       });
       r.append(p);
       $('#results>p span').text($('#agendas button.selected:not(.indifferent)').length);
-      $('#parties-list img').hide().first().show();
+      $('#parties-list li>img').hide().first().show();
       return show_page('#results');
     });
     page('*', function() {
@@ -97,16 +96,15 @@
       hashbang: true
     });
     parse_score = function(e) {
-      return parseFloat($(e).attr('score') || 0);
+      return parseFloat($(e).data().score || 0);
     };
     hide_nav_to_results = function() {
       return $('#agendas footer,#categories footer').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
     };
     disable_category = function() {
-      var cid, voted;
+      var voted;
       voted = $('#agendas button.selected:visible:not(.indifferent)').length;
-      cid = location.pathname + location.hash;
-      return $('#categories a[href="' + cid + '"]').toggleClass('has-votes', voted !== 0);
+      return $("#categories a[href=\"" + location.hash + "\"]").toggleClass('has-votes', voted !== 0);
     };
     $('#agendas-list').on('click', 'button', function(ev) {
       var b, v;
