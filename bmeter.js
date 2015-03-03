@@ -19,24 +19,18 @@
     page('about', page_turner('#about'));
     page('qna', page_turner('#qna'));
     page('categories', page_turner('#categories'));
-    page('agendas', function(context) {
-      var c, cid, showall;
-      cid = context.hash;
-      c = _.find(categories, function(c) {
-        return cid === JSON.stringify(c.id);
-      });
-      c || (c = {
-        'category': 'כל האג\'נדות',
-        'id': [],
-        'fonticon': ''
-      });
-      showall = !c.id.length;
-      $('#agendas h2').empty().text(c.category).prepend($("<i class=\"fa " + (c.fonticon || '') + "\"></i>"));
+    page('agendas:arr', function(context) {
+      var c, cid, icon, ids;
+      cid = context.path.slice('agendas'.length);
+      ids = $.parseJSON(cid);
+      c = $("#categories-list a[href=\"#!" + context.path + "\"]");
+      icon = c.attr('class').match(/fa-\S+/)[0];
+      $('#agendas h2').empty().text(c.text()).prepend($("<i class=\"fa " + icon + "\"></i>"));
       $('#agendas-list li').each(function() {
         var a, aid, _ref;
         a = $(this);
         aid = a.attr('id').slice('agenda-'.length);
-        return a.toggle(showall || (_ref = parseInt(aid, 10), __indexOf.call(c.id, _ref) >= 0));
+        return a.toggle((_ref = parseInt(aid, 10), __indexOf.call(ids, _ref) >= 0));
       });
       return show_page('#agendas');
     });
@@ -96,10 +90,12 @@
       $('#parties-list img').hide().first().show();
       return show_page('#results');
     });
-    page('', function() {
+    page('*', function() {
       return show_page('#splash');
     });
-    page.start();
+    page.start({
+      hashbang: true
+    });
     parse_score = function(e) {
       return parseFloat($(e).attr('score') || 0);
     };
@@ -125,7 +121,6 @@
             return -1;
         }
       })();
-      console.log('Voted', v, 'on', b.parent().attr('id'));
       b.addClass('selected').siblings().removeClass('selected');
       disable_category();
       return hide_nav_to_results();
@@ -141,13 +136,6 @@
       ev.preventDefault();
       return $(this).parents('#agendas-list>li').children('h4,p:not(.synopsis)').toggle();
     });
-
-    /*??? # Reset all voting buttons to "indifferent". #??? No, load states from URL, so can bookmark/share voting prefs!
-    	$ '#agendas-list button'
-    	.removeClass 'selected'
-    	.filter '.indifferent'
-    	.addClass 'selected'
-     */
     return hide_nav_to_results();
   });
 

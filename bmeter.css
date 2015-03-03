@@ -25,7 +25,7 @@ h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
 header{top:0;}
 header ol{margin:0}
 header a{text-decoration:inherit}
-#parties-list img{background:#808080;display:block;width:18em;height:4em;margin:.5em auto}
+#parties-list img{display:block;width:18em;height:4em;margin:.5em auto}
 li{display:inline-block;}
 #parties-list li{display:block}
 header>ol{list-style:none}
