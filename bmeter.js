@@ -4,7 +4,7 @@
     __hasProp = {}.hasOwnProperty;
 
   $(function() {
-    var disable_category, hide_nav_to_results, page_turner, show_page;
+    var disable_category, hide_nav_to_results, page_turner, parse_score, show_page;
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').toggleClass('splash', p === '#splash');
@@ -41,15 +41,9 @@
       return show_page('#agendas');
     });
     page('results', function() {
-      var final;
+      var final, p, party, r, scores, _fn;
       final = {};
-
-      /*???
-      		$ '#parties-list>li'
-      		.each ->
-      			$ @
-      			.data 'scored',null
-       */
+      $('#parties-list h3 span').text(0);
       $('#agendas-list>li').each(function() {
         var a, dis_agree, party, ps, score, _results;
         a = $(this);
@@ -62,32 +56,42 @@
                 return -1.0;
             }
           })();
-          console.log('vote for', a.attr('id'), dis_agree);
           ps = $.parseJSON(a.attr('data-parties-scores'));
-          console.log('ps', ps);
           _results = [];
           for (party in ps) {
             if (!__hasProp.call(ps, party)) continue;
             score = ps[party];
             _results.push((function(party, score) {
-
-              /*???
-              						final[party]=[score]
-              						console.log 'p,s',party,score,'pushed to',final
-               */
               final[party] || (final[party] = []);
               return final[party].push(score * dis_agree);
-
-              /*???
-              						s=$ "#party-#{p}"
-              						.data 'scored'
-               */
             })(party, score));
           }
           return _results;
         }
       });
-      console.log(final);
+      _fn = function(party, scores) {
+        var average, total;
+        total = scores.reduce(function(x, y) {
+          return x + y;
+        });
+        average = total / scores.length;
+        return $("#party-" + party).attr('score', average).find('h3 span').text(average.toFixed(1));
+      };
+      for (party in final) {
+        if (!__hasProp.call(final, party)) continue;
+        scores = final[party];
+        _fn(party, scores);
+      }
+      r = $('#parties-list');
+      p = r.children().get();
+      p.sort(function(x, y) {
+        if ((parse_score(x)) < (parse_score(y))) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+      r.append(p);
       $('#parties-list img').hide().first().show();
       return show_page('#results');
     });
@@ -95,6 +99,9 @@
       return show_page('#splash');
     });
     page.start();
+    parse_score = function(e) {
+      return parseFloat($(e).attr('score') || 0);
+    };
     hide_nav_to_results = function() {
       return $('#agendas footer,#categories footer').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
     };
@@ -141,21 +148,6 @@
     	.addClass 'selected'
      */
     return hide_nav_to_results();
-
-    /*??? Convert JSON to HTML...
-    	_.each parties_scores,(a)->
-    		 * absolute_url":"/agenda/113/","parties
-    		aid='agenda-'+a.absolute_url.slice '/agenda/'.length,-1
-    		ps={}
-    		_.each a.parties,(p)->
-    			 * {"volume":0.0,"absolute_url":"/party/6/","score":0.0,"name":"6\u05e7\u05d3\u05d9\u05de\u05d4"}
-    			if p.score > 0
-    				pid=p.absolute_url.slice '/party/'.length,-1
-    				 *??? pid='party-'+p.absolute_url.slice '/party/'.length,-1
-    				ps[pid]=p.score
-    		$ '#'+aid
-    		.attr 'data-parties-scores',JSON.stringify ps
-     */
   });
 
 }).call(this);

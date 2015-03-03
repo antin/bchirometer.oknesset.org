@@ -34,52 +34,44 @@ $ ->
 	page 'results',->
 		# Wipe old final scores.
 		final={}
-		###???
-		$ '#parties-list>li'
-		.each ->
-			$ @
-			.data 'scored',null
-		###
+		$ '#parties-list h3 span'
+		.text 0
 		# Recalculate final scores.
 		$ '#agendas-list>li'
 		.each ->
 			a=$ @
 			# Voted?
-			#console.log 'voted?',(a.attr 'id'),a.children('button.selected:not(.indifferent)').length isnt 0
 			if a.children('button.selected:not(.indifferent)').length isnt 0
 				dis_agree=switch
 					when a.children('button.selected.agree').length isnt 0 then 1.0
 					else -1.0
-				console.log 'vote for',(a.attr 'id'),dis_agree
 				ps=$.parseJSON a.attr 'data-parties-scores'
-				console.log 'ps',ps
 				for own party,score of ps
 					do (party,score)->
-						###???
-						final[party]=[score]
-						console.log 'p,s',party,score,'pushed to',final
-						###
 						final[party] or=[] # Initialize to empty array, once.
 						final[party].push score*dis_agree # Add score.
-						###???
-						s=$ "#party-#{p}"
-						.data 'scored'
-						###
 		# Sort parties by score.
-		console.log final
-		#???...
-
+		for own party,scores of final
+			do (party,scores)->
+				total=scores.reduce (x,y)->x+y
+				average=total/scores.length
+				$ "#party-#{party}"
+				.attr 'score',average
+				.find 'h3 span'
+				.text average.toFixed 1
+			#??? parseInt a,10
+		r=$ '#parties-list'
+		p=r.children().get()
+		p.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
+		r.append p
 		# Only show best result's logo.
 		$('#parties-list img').hide().first().show()
 		show_page '#results'
 	page '',->show_page '#splash' # Root page (or index.html?), take us "home".
 	page.start() # Begin listening to location changes.
 
-	# Populate categories and agendas from constant JS?! No, write const HTML, not JSON!
-	#??? $('#categories-list').html _.template $('#category-template').html(),{categories}
-	#??? $('#agendas-list').html _.template $('#agenda-template').html(),{agendas}
-	#??? $('#parties-list').html _.template $('#party-template').html(),{parties}
-
+	# Some routines definitions.
+	parse_score=(e)->parseFloat $(e).attr('score') or 0
 	hide_nav_to_results=->
 		# Hide nav to results (entire footer) if no votes.
 		$ '#agendas footer,#categories footer'
@@ -134,18 +126,3 @@ $ ->
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	hide_nav_to_results()
-
-	###??? Convert JSON to HTML...
-	_.each parties_scores,(a)->
-		# absolute_url":"/agenda/113/","parties
-		aid='agenda-'+a.absolute_url.slice '/agenda/'.length,-1
-		ps={}
-		_.each a.parties,(p)->
-			# {"volume":0.0,"absolute_url":"/party/6/","score":0.0,"name":"6\u05e7\u05d3\u05d9\u05de\u05d4"}
-			if p.score > 0
-				pid=p.absolute_url.slice '/party/'.length,-1
-				#??? pid='party-'+p.absolute_url.slice '/party/'.length,-1
-				ps[pid]=p.score
-		$ '#'+aid
-		.attr 'data-parties-scores',JSON.stringify ps
-	###
