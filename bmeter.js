@@ -92,6 +92,7 @@
         }
       });
       r.append(p);
+      $('#results>p span').text($('#agendas button.selected:not(.indifferent)').length);
       $('#parties-list img').hide().first().show();
       return show_page('#results');
     });

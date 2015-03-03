@@ -64,6 +64,9 @@ $ ->
 		p=r.children().get()
 		p.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
 		r.append p
+		# Count votes.
+		$ '#results>p span'
+		.text $('#agendas button.selected:not(.indifferent)').length
 		# Only show best result's logo.
 		$('#parties-list img').hide().first().show()
 		show_page '#results'
