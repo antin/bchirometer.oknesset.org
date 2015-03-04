@@ -114,13 +114,6 @@ $ ->
 		disable_category()
 		hide_nav_to_results()
 	# Expansion clicks.
-	$ '.synopsis a' #??? Replace this with 'expand' handler.
-	.click (ev)->
-		ev.preventDefault()
-		$ @
-		.parents '#agendas-list>li'
-		.children 'h4,p:not(.synopsis)'
-		.toggle()
 	$ 'a.expand'
 	.click (ev)->
 		ev.preventDefault() # Not a real (nav) link.
@@ -129,6 +122,15 @@ $ ->
 		#??? .next 'span'
 		$ id
 		.toggle()
+	###??? Replace this with 'expand' handler.
+	$ '.synopsis a'
+	.click (ev)->
+		ev.preventDefault()
+		$ @
+		.parents '#agendas-list>li'
+		.children 'h4,p:not(.synopsis)'
+		.toggle()
+	###
 	# Next category.
 	$ '#next'
 	.click (ev)->

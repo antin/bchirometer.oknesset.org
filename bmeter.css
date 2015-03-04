@@ -19,8 +19,9 @@ footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff;}
 h1{font-size:3em}
 h1,h2{margin:1rem auto;text-align:center}
 h3{margin:1.5rem 0 0}
+h4,small{font-size:small}
 h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
-#agendas h4.synopsis,#agendas p.synopsis{display:block;margin:2em 0;}
+#agendas h4.synopsis,#agendas p.synopsis{display:block;}
 #agendas h4.synopsis a:after,#agendas p.synopsis a:after{content:" (לפרטים)"}
 header{top:0;}
 header ol{margin:0}
@@ -32,7 +33,6 @@ header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center;clear:both}
 ol#parties-list{text-align:start}
 section,.collapsed{display:none}
-small{font-size:small}
 .agree{border:#009b42 solid medium;}
 .agree.selected{background:#009b42}
 .bgi{background:url("bg/podium.jpg") no-repeat center top fixed;background-size:cover}

@@ -130,16 +130,22 @@
       disable_category();
       return hide_nav_to_results();
     });
-    $('.synopsis a').click(function(ev) {
-      ev.preventDefault();
-      return $(this).parents('#agendas-list>li').children('h4,p:not(.synopsis)').toggle();
-    });
     $('a.expand').click(function(ev) {
       var id;
       ev.preventDefault();
       id = $(ev.target).attr('href');
       return $(id).toggle();
     });
+
+    /*??? Replace this with 'expand' handler.
+    	$ '.synopsis a'
+    	.click (ev)->
+    		ev.preventDefault()
+    		$ @
+    		.parents '#agendas-list>li'
+    		.children 'h4,p:not(.synopsis)'
+    		.toggle()
+     */
     $('#next').click(function(ev) {
       var n;
       ev.preventDefault();
