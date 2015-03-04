@@ -32,6 +32,7 @@ header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center;clear:both}
 ol#parties-list{text-align:start}
 section,.collapsed{display:none}
+small{font-size:small}
 .agree{border:#009b42 solid medium;}
 .agree.selected{background:#009b42}
 .bgi{background:url("bg/podium.jpg") no-repeat center top fixed;background-size:cover}

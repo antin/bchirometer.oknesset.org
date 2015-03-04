@@ -149,6 +149,7 @@
       }
       return page(n.attr('href'));
     });
+    $('button.disagree').after($('<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'));
     hide_nav_to_results();
     return $('body').keyup(function(ev) {
       if (ev.keyCode === 66) {

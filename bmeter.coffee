@@ -138,6 +138,10 @@ $ ->
 		if n.length is 0 then n=$("#categories-list a").first()
 		page n.attr 'href'
 
+	# Dynamically generated content.
+	$ 'button.disagree'
+	.after $ '<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'
+
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	hide_nav_to_results()
 
