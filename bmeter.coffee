@@ -30,10 +30,22 @@ $ ->
 			.slice 'agenda-'.length
 			a.toggle parseInt(aid,10) in ids
 		show_page '#agendas'
-	page 'results:votes',(context)-> # Nav to results page.
+	page 'results:votes?',(context)-> # Nav to results page.
 		# Guard against missing votes: redirect home.
-		unless context.path.slice 'results'.length then page '#splash'
-		#??? Extract votes from URL.
+		unless context.params.votes then page '/'
+		# Extract votes from URL. Set voting buttons.
+		try
+			votes=$.parseJSON context.params.votes
+		catch _
+			return page '/'
+		for own agenda,vote of votes
+			do (agenda,vote)->
+				v=if vote is 'y' then 'agree' else 'disagree'
+				$ "#agenda-#{agenda} button.#{v}"
+				.addClass 'selected'
+				.siblings().removeClass 'selected'
+		# Guard against invalid votes.
+		unless $('#agendas button.selected:visible:not(.indifferent)').length then page '/'
 		# Wipe old final scores: reset to zeroes.
 		final={}
 		$ '#parties-list li'
@@ -61,10 +73,11 @@ $ ->
 			do (party,scores)->
 				sum=scores.reduce (x,y)->x+y
 				average=sum/scores.length
+				#??? meter=switch
 				$ "#party-#{party}"
 				.data 'score',average
 				.find 'h3 img'
-				.attr 'src','score0.png'
+				.attr 'src','meter/zero.png'
 				.siblings 'span'
 				.text average.toFixed 1
 				.attr 'title','ממוצע של \u202d'+scores # Just for debugging?
@@ -101,7 +114,7 @@ $ ->
 			b=$ @
 			aid=b.parents('li').attr('id').slice 'agenda-'.length
 			vs[aid]=if b.hasClass 'agree' then 'y' else 'n'
-		return if not vs then '' else JSON.stringify vs
+		JSON.stringify vs
 
 	# Voting buttons handler.
 	$ '#agendas-list'

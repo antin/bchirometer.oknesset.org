@@ -29,7 +29,7 @@ header ol{margin:0}
 header a{text-decoration:inherit}
 #parties-list img{display:block;width:18em;height:4em;margin:.5em auto}
 li{display:inline-block;}
-#about li,#qna li,#parties-list li{display:block}
+#about li,#qna li,#parties-list li{display:block;clear:both}
 header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center;clear:both}
 ol#parties-list{text-align:start}

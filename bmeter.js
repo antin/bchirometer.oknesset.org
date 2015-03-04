@@ -34,10 +34,29 @@
       });
       return show_page('#agendas');
     });
-    page('results:votes', function(context) {
-      var final, p, party, r, scores, _fn;
-      if (!context.path.slice('results'.length)) {
-        page('#splash');
+    page('results:votes?', function(context) {
+      var agenda, final, p, party, r, scores, vote, votes, _, _fn, _fn1;
+      if (!context.params.votes) {
+        page('/');
+      }
+      try {
+        votes = $.parseJSON(context.params.votes);
+      } catch (_error) {
+        _ = _error;
+        return page('/');
+      }
+      _fn = function(agenda, vote) {
+        var v;
+        v = vote === 'y' ? 'agree' : 'disagree';
+        return $("#agenda-" + agenda + " button." + v).addClass('selected').siblings().removeClass('selected');
+      };
+      for (agenda in votes) {
+        if (!__hasProp.call(votes, agenda)) continue;
+        vote = votes[agenda];
+        _fn(agenda, vote);
+      }
+      if (!$('#agendas button.selected:visible:not(.indifferent)').length) {
+        page('/');
       }
       final = {};
       $('#parties-list li').data('score', 0).find('h3 img').attr('src', 'meter/zero.png').siblings('span').text('—');
@@ -66,18 +85,18 @@
           return _results;
         }
       });
-      _fn = function(party, scores) {
+      _fn1 = function(party, scores) {
         var average, sum;
         sum = scores.reduce(function(x, y) {
           return x + y;
         });
         average = sum / scores.length;
-        return $("#party-" + party).data('score', average).find('h3 img').attr('src', 'score0.png').siblings('span').text(average.toFixed(1)).attr('title', 'ממוצע של \u202d' + scores);
+        return $("#party-" + party).data('score', average).find('h3 img').attr('src', 'meter/zero.png').siblings('span').text(average.toFixed(1)).attr('title', 'ממוצע של \u202d' + scores);
       };
       for (party in final) {
         if (!__hasProp.call(final, party)) continue;
         scores = final[party];
-        _fn(party, scores);
+        _fn1(party, scores);
       }
       r = $('#parties-list');
       p = r.children().get().sort(function(x, y) {
@@ -119,11 +138,7 @@
         aid = b.parents('li').attr('id').slice('agenda-'.length);
         return vs[aid] = b.hasClass('agree') ? 'y' : 'n';
       });
-      if (!vs) {
-        return '';
-      } else {
-        return JSON.stringify(vs);
-      }
+      return JSON.stringify(vs);
     };
     $('#agendas-list').on('click', 'button', function(ev) {
       var b, v;
