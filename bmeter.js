@@ -19,7 +19,7 @@
     page('about', page_turner('#about'));
     page('qna', page_turner('#qna'));
     page('categories', page_turner('#categories'));
-    page('agendas:arr', function(context) {
+    page('agendas:cid', function(context) {
       var c, cid, icon, ids;
       cid = context.path.slice('agendas'.length);
       ids = $.parseJSON(cid);
@@ -99,7 +99,7 @@
       return parseFloat($(e).data().score || 0);
     };
     hide_nav_to_results = function() {
-      return $('#agendas footer,#categories footer').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
+      return $('.to-results').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
     };
     disable_category = function() {
       var voted;
@@ -134,7 +134,27 @@
       ev.preventDefault();
       return $(this).parents('#agendas-list>li').children('h4,p:not(.synopsis)').toggle();
     });
-    return hide_nav_to_results();
+    $('a.expand').click(function(ev) {
+      var id;
+      ev.preventDefault();
+      id = $(ev.target).attr('href');
+      return $(id).toggle();
+    });
+    $('#next').click(function(ev) {
+      var n;
+      ev.preventDefault();
+      n = $("#categories-list a[href=\"" + location.hash + "\"]").parent().next().find('a');
+      if (n.length === 0) {
+        n = $("#categories-list a").first();
+      }
+      return page(n.attr('href'));
+    });
+    hide_nav_to_results();
+    return $('body').keyup(function(ev) {
+      if (ev.keyCode === 66) {
+        return $('body').toggleClass('bgi');
+      }
+    });
   });
 
 }).call(this);

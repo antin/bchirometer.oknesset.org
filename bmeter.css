@@ -1,6 +1,6 @@
 footer li a,header li a{color:inherit}
 body{max-width:28em;margin:4em auto;background:#fff;color:#000;font-family:Alef,sans-serif;overflow-y:scroll}
-button{background:#fff;font-family:inherit}
+button{background:transparent;font-family:inherit}
 button,footer a,header a,.button{display:block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
 button.fa::before,footer a.fa::before,header a.fa::before,.button.fa::before{padding-left:.5em}
 #agendas-list button,#agendas-list footer a,#agendas-list header a,#agendas-list .button,#splash button,#splash footer a,#splash header a,#splash .button{display:inline-block}
@@ -20,7 +20,6 @@ h1{font-size:3em}
 h1,h2{margin:1rem auto;text-align:center}
 h3{margin:1.5rem 0 0}
 h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
-#agendas h4,#agendas p{display:none;}
 #agendas h4.synopsis,#agendas p.synopsis{display:block;margin:2em 0;}
 #agendas h4.synopsis a:after,#agendas p.synopsis a:after{content:" (לפרטים)"}
 header{top:0;}
@@ -32,10 +31,10 @@ li{display:inline-block;}
 header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center;clear:both}
 ol#parties-list{text-align:start}
-section{display:none}
-[hidden]{display:none}
+section,.collapsed{display:none}
 .agree{border:#009b42 solid medium;}
 .agree.selected{background:#009b42}
+.bgi{background:url("bg/podium.jpg") no-repeat center top fixed;background-size:cover}
 .disagree{border:#f95554 solid medium;}
 .disagree.selected{background:#f95554}
 .indifferent{border:#f9c400 solid medium;}
@@ -48,7 +47,8 @@ section{display:none}
 #agendas-list>li{width:100%;text-align:start}
 #parties-list h3 img{float:left;height:1em;width:2em}
 #parties-list h3 span{display:inline-block;width:4em;direction:ltr}
-#splash{text-align:center}
+#splash{text-align:center;}
+#splash p{text-align:start}
 @font-face{font-family:'Alef';font-weight:bold;font-style:normal;src:url("https://oknesset.org/static/font/Alef-bold.eot");src:url("https://oknesset.org/static/font/Alef-bold.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-bold.woff") format('woff'),url("https://oknesset.org/static/font/Alef-bold.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-bold.svg#alefbold") format('svg')}
 @font-face{font-family:'Alef';font-weight:normal;font-style:normal;src:url("https://oknesset.org/static/font/Alef-regular.eot");src:url("https://oknesset.org/static/font/Alef-regular.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-regular.woff") format('woff'),url("https://oknesset.org/static/font/Alef-regular.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-regular.svg#alefregular") format('svg')}
 .fa{padding-left:.5em}

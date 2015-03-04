@@ -23,7 +23,7 @@ body
 	font-family Alef,sans-serif
 	overflow-y scroll //??? Replace with nicer, JS-based, scrollbar, eg: perfectscrollbar.js.
 button // Reset browser's defaults.
-	background white
+	background transparent
 	font-family inherit
 button
 footer a
@@ -107,7 +107,7 @@ p
 	font-weight normal
 	word-wrap break-word
 	#agendas &
-		display none //??? Hidden initially; put [hidden] attribute in HTML instead?
+		//??? display none //??? Hidden initially; put [hidden] attribute in HTML instead?
 		&.synopsis
 			display block
 			margin 2em 0
@@ -143,13 +143,16 @@ ol
 		//??? border  solid medium #604dff
 		//??? padding 1em
 section
-	display none
-[hidden]
+.collapsed
+//??? [hidden]
 	display none
 .agree
 	border greenish solid medium
 	&.selected
 		background greenish
+.bgi
+	background url(bg/podium.jpg) no-repeat center top fixed
+	background-size cover
 .disagree
 	border redish solid medium
 	&.selected
@@ -187,6 +190,8 @@ section
 		direction ltr
 #splash
 	text-align center
+	p
+		text-align start
 
 // Fonts.
 //??? Should use CDN instead! Either

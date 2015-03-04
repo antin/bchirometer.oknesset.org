@@ -8,8 +8,9 @@ $ ->
 	page 'about',page_turner '#about'
 	page 'qna',page_turner '#qna'
 	page 'categories',page_turner '#categories'
-	page 'agendas:arr',(context)-> # (Apparently, window.location is updated after this handler, so can't get URL hash from it. Page.js provides details in a "context" parameter.)
-		# Identify category from URL and fetch details; eg "agendas[92,113,101]" means category includes agendas 92, 113, and 101.
+	page 'agendas:cid',(context)->
+		# Identify category from URL and fetch details; eg "#!agendas[92,113,101]" means category includes agendas 92, 113, and 101.
+		# (Apparently, window.location is updated after this handler, so can't get URL hash from it. Page.js provides details in a "context" parameter.)
 		cid=context.path.slice 'agendas'.length
 		ids=$.parseJSON cid
 		c=$ "#categories-list a[href=\"#!#{context.path}\"]"
@@ -27,7 +28,7 @@ $ ->
 			.slice 'agenda-'.length
 			a.toggle parseInt(aid,10) in ids
 		show_page '#agendas'
-	page 'results',->
+	page 'results',-> # Nav to results page.
 		# Wipe old final scores: reset to zeroes.
 		final={}
 		$ '#parties-list li'
@@ -75,11 +76,12 @@ $ ->
 	page '*',->show_page '#splash' # Root page (or index.html?), or anything else — take us "home".
 	page.start hashbang:yes # Begin listening to location changes.
 
-	# Some routines definitions.
+	# Some routines.
 	parse_score=(e)->parseFloat $(e).data().score or 0
 	hide_nav_to_results=->
-		# Hide nav to results (entire footer) if no votes.
-		$ '#agendas footer,#categories footer'
+		# Hide/disable nav to results (entire footer?) if no votes.
+		#??? $ '#agendas footer,#categories footer'
+		$ '.to-results'
 		.toggle $('#agendas button.selected:not(.indifferent)').length isnt 0
 	disable_category=->
 		# Mark category to indicate whether votes done in it.
@@ -111,14 +113,37 @@ $ ->
 		# Update stuff depending on number of votes.
 		disable_category()
 		hide_nav_to_results()
-	# Synopsis expansion clicks.
-	$ '.synopsis a'
+	# Expansion clicks.
+	$ '.synopsis a' #??? Replace this with 'expand' handler.
 	.click (ev)->
 		ev.preventDefault()
 		$ @
 		.parents '#agendas-list>li'
 		.children 'h4,p:not(.synopsis)'
 		.toggle()
+	$ 'a.expand'
+	.click (ev)->
+		ev.preventDefault() # Not a real (nav) link.
+		id=$ ev.target
+		.attr 'href'
+		#??? .next 'span'
+		$ id
+		.toggle()
+	# Next category.
+	$ '#next'
+	.click (ev)->
+		ev.preventDefault() # Not a real (nav) link.
+		# Find current category, and decide which next: from last cycle back to first.
+		n=$("#categories-list a[href=\"#{location.hash}\"]").parent().next().find 'a'
+		if n.length is 0 then n=$("#categories-list a").first()
+		page n.attr 'href'
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	hide_nav_to_results()
+
+	#??? Backdoors!
+	$ 'body'
+	.keyup (ev)->
+		if ev.keyCode is 66
+			$ 'body'
+			.toggleClass 'bgi'
