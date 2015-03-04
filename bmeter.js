@@ -4,7 +4,7 @@
     __hasProp = {}.hasOwnProperty;
 
   $(function() {
-    var disable_category, hide_nav_to_results, page_turner, parse_score, show_page;
+    var disable_category, page_turner, parse_score, show_page, update_link_results, votes_serialize;
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').attr('data-page', p);
@@ -34,10 +34,13 @@
       });
       return show_page('#agendas');
     });
-    page('results', function() {
+    page('results:votes', function(context) {
       var final, p, party, r, scores, _fn;
+      if (!context.path.slice('results'.length)) {
+        page('#splash');
+      }
       final = {};
-      $('#parties-list li').data('score', 0).find('h3 img').attr('src', 'score0.png').siblings('span').text('—');
+      $('#parties-list li').data('score', 0).find('h3 img').attr('src', 'meter/zero.png').siblings('span').text('—');
       $('#agendas-list>li').each(function() {
         var a, dis_agree, party, ps, score, _results;
         a = $(this);
@@ -98,13 +101,29 @@
     parse_score = function(e) {
       return parseFloat($(e).data().score || 0);
     };
-    hide_nav_to_results = function() {
-      return $('.to-results').toggle($('#agendas button.selected:not(.indifferent)').length !== 0);
+    update_link_results = function() {
+      $('.to-results').toggleClass('disabled', $('#agendas button.selected:not(.indifferent)').length === 0);
+      return $('.to-results').attr('href', '#!results' + votes_serialize());
     };
     disable_category = function() {
       var voted;
       voted = $('#agendas button.selected:visible:not(.indifferent)').length;
       return $("#categories a[href=\"" + location.hash + "\"]").toggleClass('has-votes', voted !== 0);
+    };
+    votes_serialize = function() {
+      var vs;
+      vs = {};
+      $('#agendas button.selected:not(.indifferent)').each(function() {
+        var aid, b;
+        b = $(this);
+        aid = b.parents('li').attr('id').slice('agenda-'.length);
+        return vs[aid] = b.hasClass('agree') ? 'y' : 'n';
+      });
+      if (!vs) {
+        return '';
+      } else {
+        return JSON.stringify(vs);
+      }
     };
     $('#agendas-list').on('click', 'button', function(ev) {
       var b, v;
@@ -121,14 +140,19 @@
       })();
       b.addClass('selected').siblings().removeClass('selected');
       disable_category();
-      return hide_nav_to_results();
+      return update_link_results();
     });
     $('#cancel').click(function(ev) {
       $('#agendas button.selected:visible:not(.indifferent)').each(function() {
         return $(this).removeClass('selected').siblings('.indifferent').addClass('selected');
       });
       disable_category();
-      return hide_nav_to_results();
+      return update_link_results();
+    });
+    $('.to-results').click(function(ev) {
+      if ($(this).hasClass('disabled')) {
+        return ev.preventDefault();
+      }
     });
     $('a.expand').click(function(ev) {
       var id;
@@ -156,7 +180,7 @@
       return page(n.attr('href'));
     });
     $('button.disagree').after($('<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'));
-    hide_nav_to_results();
+    update_link_results();
     return $('.bg-toggle').click(function(ev) {
       ev.preventDefault();
       return $('body').toggleClass('bgi');

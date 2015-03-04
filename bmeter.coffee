@@ -1,9 +1,11 @@
 $ ->
+	# SPA with virtual pages.
 	show_page=(p)->
 		$('section').hide().filter(p).show()
-		$('body').attr 'data-page',p
+		$('body').attr 'data-page',p # Mark current page on body so can style with CSS selectors.
 		window.scrollTo 0,0
-	page_turner=(p)->return ->return show_page p
+	page_turner=(p)->return ->return show_page p # Factory.
+	# Routing.
 	page.base '/'
 	page 'about',page_turner '#about'
 	page 'qna',page_turner '#qna'
@@ -28,13 +30,16 @@ $ ->
 			.slice 'agenda-'.length
 			a.toggle parseInt(aid,10) in ids
 		show_page '#agendas'
-	page 'results',-> # Nav to results page.
+	page 'results:votes',(context)-> # Nav to results page.
+		# Guard against missing votes: redirect home.
+		unless context.path.slice 'results'.length then page '#splash'
+		#??? Extract votes from URL.
 		# Wipe old final scores: reset to zeroes.
 		final={}
 		$ '#parties-list li'
 		.data 'score',0
 		.find 'h3 img'
-		.attr 'src','score0.png'
+		.attr 'src','meter/zero.png'
 		.siblings 'span'
 		.text '—'
 		# Recalculate final scores.
@@ -73,20 +78,30 @@ $ ->
 		# Only show best result's logo.
 		$('#parties-list li>img').hide().first().show()
 		show_page '#results'
-	page '*',->show_page '#splash' # Root page (or index.html?), or anything else — take us "home".
+	page '*',->show_page '#splash' # Root page, or anything else — take us "home".
 	page.start hashbang:yes # Begin listening to location changes.
 
 	# Some routines.
 	parse_score=(e)->parseFloat $(e).data().score or 0
-	hide_nav_to_results=->
+	update_link_results=->
 		# Hide/disable nav to results (entire footer?) if no votes.
-		#??? $ '#agendas footer,#categories footer'
 		$ '.to-results'
-		.toggle $('#agendas button.selected:not(.indifferent)').length isnt 0
+		.toggleClass 'disabled',$('#agendas button.selected:not(.indifferent)').length is 0
+		# Modify URL link to results page to contain votes so can bookmark, share…
+		$ '.to-results'
+		.attr 'href','#!results'+votes_serialize()
 	disable_category=->
 		# Mark category to indicate whether votes done in it.
 		voted=$('#agendas button.selected:visible:not(.indifferent)').length # Find any dis/agree votes in current category.
 		$("#categories a[href=\"#{location.hash}\"]").toggleClass 'has-votes',voted isnt 0
+	votes_serialize=->
+		vs={}
+		$ '#agendas button.selected:not(.indifferent)'
+		.each ->
+			b=$ @
+			aid=b.parents('li').attr('id').slice 'agenda-'.length
+			vs[aid]=if b.hasClass 'agree' then 'y' else 'n'
+		return if not vs then '' else JSON.stringify vs
 
 	# Voting buttons handler.
 	$ '#agendas-list'
@@ -100,8 +115,8 @@ $ ->
 		.siblings().removeClass 'selected'
 		# Update stuff depending on number of votes.
 		disable_category()
-		hide_nav_to_results()
-	# Cancel votes button handler.
+		update_link_results()
+	# Cancel votes button handler. #??? Removed.
 	$ '#cancel'
 	.click (ev)->
 		$ '#agendas button.selected:visible:not(.indifferent)'
@@ -112,7 +127,11 @@ $ ->
 			.addClass 'selected'
 		# Update stuff depending on number of votes.
 		disable_category()
-		hide_nav_to_results()
+		update_link_results()
+	# Disable results button.
+	$ '.to-results'
+	.click (ev)->
+		if $(@).hasClass 'disabled' then ev.preventDefault()
 	# Expansion clicks.
 	$ 'a.expand'
 	.click (ev)->
@@ -145,7 +164,7 @@ $ ->
 	.after $ '<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
-	hide_nav_to_results()
+	update_link_results()
 
 	#??? Backdoors!
 	$ '.bg-toggle'

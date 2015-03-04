@@ -12,7 +12,8 @@ footer a,#categories-list a,#about .button,#qna .button{background:#7290e0;color
 footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#424242;color:#fff}
 footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff;}
 #agendas footer,#categories footer{background:#fff;}
-#agendas footer a,#categories footer a{background:#e8e860;color:#000}
+#agendas footer a,#categories footer a{background:#e8e860;color:#000;}
+#agendas footer a.disabled,#categories footer a.disabled{background:#e0e0c3}
 #results footer{height:inherit;background:#e8e860;color:#000;}
 #results footer a{font-size:1.5em;padding:0}
 #results footer a,#results footer ol{background:#fff}
