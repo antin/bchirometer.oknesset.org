@@ -7,7 +7,7 @@
     var disable_category, hide_nav_to_results, page_turner, parse_score, show_page;
     show_page = function(p) {
       $('section').hide().filter(p).show();
-      $('body').toggleClass('splash', p === '#splash');
+      $('body').attr('data-page', p);
       return window.scrollTo(0, 0);
     };
     page_turner = function(p) {
@@ -157,10 +157,9 @@
     });
     $('button.disagree').after($('<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'));
     hide_nav_to_results();
-    return $('body').keyup(function(ev) {
-      if (ev.keyCode === 66) {
-        return $('body').toggleClass('bgi');
-      }
+    return $('.bg-toggle').click(function(ev) {
+      ev.preventDefault();
+      return $('body').toggleClass('bgi');
     });
   });
 

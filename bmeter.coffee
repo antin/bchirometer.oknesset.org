@@ -1,7 +1,7 @@
 $ ->
 	show_page=(p)->
 		$('section').hide().filter(p).show()
-		$('body').toggleClass 'splash',p is '#splash'
+		$('body').attr 'data-page',p
 		window.scrollTo 0,0
 	page_turner=(p)->return ->return show_page p
 	page.base '/'
@@ -148,8 +148,8 @@ $ ->
 	hide_nav_to_results()
 
 	#??? Backdoors!
-	$ 'body'
-	.keyup (ev)->
-		if ev.keyCode is 66
-			$ 'body'
-			.toggleClass 'bgi'
+	$ '.bg-toggle'
+	.click (ev)->
+		ev.preventDefault() # Not a real (nav) link.
+		$ 'body'
+		.toggleClass 'bgi'

@@ -8,6 +8,7 @@ grayish=#c7c2f7
 greenish=#009b42
 redish=#f95554
 yellowish=#f9c400
+yellowdisabled=#e0e0c3
 facebookcolor=#4466a3
 twittercolor=#98e2fd
 // Layouts and stuff.
@@ -129,7 +130,9 @@ img
 		height 4em
 		margin 0.5em auto
 li
-	display inline-block
+	display inline-block //??? Invert, overrides?
+	#about &,
+	#qna &,
 	#parties-list &
 		display block
 ol
@@ -156,6 +159,10 @@ section
 .bgi
 	background url(bg/podium-faded.jpg) no-repeat center top fixed
 	background-size cover
+.bg-toggle
+	position fixed
+	bottom 4em
+	right 2em
 .disagree
 	border redish solid medium
 	&.selected
@@ -164,11 +171,17 @@ section
 	border yellowish solid medium
 	&.selected
 		background yellowish
-.we-are
-	background black
-.splash
+.we-are img
+	height 5em
+	margin 0 1em
+[data-page="#splash"]
 	background blueish
 	color white
+[data-page="#about"] header [href="#!about"]
+[data-page="#categories"] header [href="#!categories"]
+[data-page="#qna"] header [href="#!qna"]
+[data-page="#splash"] header [href="/"]
+		color black
 #agendas
 #results
 	margin-bottom 7em
