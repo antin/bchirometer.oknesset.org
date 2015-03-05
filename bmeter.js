@@ -5,6 +5,29 @@
 
   $(function() {
     var disable_category, page_turner, parse_score, show_page, update_link_results, votes_serialize;
+    parse_score = function(e) {
+      return parseFloat($(e).data().score || 0);
+    };
+    update_link_results = function() {
+      $('.to-results').toggleClass('disabled', $('#agendas button.selected:not(.indifferent)').length === 0);
+      return $('.to-results').attr('href', '#!results' + votes_serialize());
+    };
+    disable_category = function() {
+      var voted;
+      voted = $('#agendas button.selected:visible:not(.indifferent)').length;
+      return $("#categories a[href=\"" + location.hash + "\"]").toggleClass('has-votes', voted !== 0);
+    };
+    votes_serialize = function() {
+      var vs;
+      vs = {};
+      $('#agendas button.selected:not(.indifferent)').each(function() {
+        var aid, b;
+        b = $(this);
+        aid = b.parents('li').attr('id').slice('agenda-'.length);
+        return vs[aid] = b.hasClass('agree') ? 'y' : 'n';
+      });
+      return JSON.stringify(vs);
+    };
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').attr('data-page', p);
@@ -55,7 +78,7 @@
         vote = votes[agenda];
         _fn(agenda, vote);
       }
-      if (!$('#agendas button.selected:visible:not(.indifferent)').length) {
+      if ($('#agendas button.selected:not(.indifferent)').length === 0) {
         page('/');
       }
       final = {};
@@ -117,29 +140,6 @@
     page.start({
       hashbang: true
     });
-    parse_score = function(e) {
-      return parseFloat($(e).data().score || 0);
-    };
-    update_link_results = function() {
-      $('.to-results').toggleClass('disabled', $('#agendas button.selected:not(.indifferent)').length === 0);
-      return $('.to-results').attr('href', '#!results' + votes_serialize());
-    };
-    disable_category = function() {
-      var voted;
-      voted = $('#agendas button.selected:visible:not(.indifferent)').length;
-      return $("#categories a[href=\"" + location.hash + "\"]").toggleClass('has-votes', voted !== 0);
-    };
-    votes_serialize = function() {
-      var vs;
-      vs = {};
-      $('#agendas button.selected:not(.indifferent)').each(function() {
-        var aid, b;
-        b = $(this);
-        aid = b.parents('li').attr('id').slice('agenda-'.length);
-        return vs[aid] = b.hasClass('agree') ? 'y' : 'n';
-      });
-      return JSON.stringify(vs);
-    };
     $('#agendas-list').on('click', 'button', function(ev) {
       var b, v;
       b = $(ev.target);
@@ -157,13 +157,20 @@
       disable_category();
       return update_link_results();
     });
-    $('#cancel').click(function(ev) {
-      $('#agendas button.selected:visible:not(.indifferent)').each(function() {
-        return $(this).removeClass('selected').siblings('.indifferent').addClass('selected');
-      });
-      disable_category();
-      return update_link_results();
-    });
+
+    /*??? # Cancel votes button handler. #??? Removed.
+    	$ '#cancel'
+    	.click (ev)->
+    		$ '#agendas button.selected:visible:not(.indifferent)'
+    		.each ->
+    			$ @
+    			.removeClass 'selected'
+    			.siblings '.indifferent'
+    			.addClass 'selected'
+    		 * Update stuff depending on number of votes.
+    		disable_category()
+    		update_link_results()
+     */
     $('.to-results').click(function(ev) {
       if ($(this).hasClass('disabled')) {
         return ev.preventDefault();

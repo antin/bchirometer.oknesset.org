@@ -1,5 +1,7 @@
-footer li a,header li a{color:inherit}
-body{max-width:28em;margin:4em auto;background:#fff;color:#000;font-family:Alef,sans-serif;overflow-y:scroll}
+@import url("http://fonts.googleapis.com/earlyaccess/alefhebrew.css");
+footer li a,header li a{color:inherit;}
+footer li a[href="#!categories"],header li a[href="#!categories"]{color:#7290e0;font-size:120%;padding:.8rem}
+body{max-width:28em;margin:4em auto;padding:0 1em;background:#fff;color:#000;font-family:"Alef Hebrew",sans-serif;overflow-y:scroll}
 button{background:transparent;font-family:inherit}
 button,footer a,header a,.button{display:block;margin:0;padding:1em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
 button.fa::before,footer a.fa::before,header a.fa::before,.button.fa::before{padding-left:.5em}
@@ -9,7 +11,7 @@ footer a,#categories-list a,#about .button,#qna .button{background:#7290e0;color
 #categories-list a{width:8em;height:6em;margin:.3em;}
 #categories-list a.has-votes{background:#aec1f5}
 .button{background:#fff;color:#000}
-footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#424242;color:#fff}
+footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#424242;color:#fff;z-index:2}
 footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff;}
 #agendas footer,#categories footer{background:#fff;}
 #agendas footer a,#categories footer a{background:#e8e860;color:#000;}
@@ -25,13 +27,13 @@ h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
 #agendas h4.synopsis,#agendas p.synopsis{display:block;}
 #agendas h4.synopsis a:after,#agendas p.synopsis a:after{content:" (לפרטים)"}
 header{top:0;}
-header ol{margin:0}
 header a{text-decoration:inherit}
 #parties-list img{display:block;width:18em;height:4em;margin:.5em auto}
 li{display:inline-block;}
 #about li,#qna li,#parties-list li{display:block;clear:both}
-header>ol{list-style:none}
 footer>ol,section>ol{margin:0 auto;padding:0;text-align:center;clear:both}
+header>ol{list-style:none;margin:0;justify-content:center;padding:0;display:flex;flex-flow:row nowrap;}
+header>ol>li{flex:0 0 auto;display:block}
 ol#parties-list{text-align:start}
 section,.collapsed{display:none}
 .agree{border:#009b42 solid medium;}
@@ -43,6 +45,7 @@ section,.collapsed{display:none}
 .indifferent{border:#f9c400 solid medium;}
 .indifferent.selected{background:#f9c400}
 .we-are img{height:5em;margin:0 1em}
+.we-are li{display:inline-block}
 [data-page="#splash"]{background:#604dff;color:#fff}
 [data-page="#about"] header [href="#!about"],[data-page="#categories"] header [href="#!categories"],[data-page="#qna"] header [href="#!qna"],[data-page="#splash"] header [href="/"]{color:#000}
 #agendas,#results{margin-bottom:7em}
@@ -53,7 +56,5 @@ section,.collapsed{display:none}
 #parties-list h3 span{display:inline-block;width:4em;direction:ltr}
 #splash{text-align:center;}
 #splash p{text-align:start}
-@font-face{font-family:'Alef';font-weight:bold;font-style:normal;src:url("https://oknesset.org/static/font/Alef-bold.eot");src:url("https://oknesset.org/static/font/Alef-bold.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-bold.woff") format('woff'),url("https://oknesset.org/static/font/Alef-bold.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-bold.svg#alefbold") format('svg')}
-@font-face{font-family:'Alef';font-weight:normal;font-style:normal;src:url("https://oknesset.org/static/font/Alef-regular.eot");src:url("https://oknesset.org/static/font/Alef-regular.eot?#iefix") format('embedded-opentype'),url("https://oknesset.org/static/font/Alef-regular.woff") format('woff'),url("https://oknesset.org/static/font/Alef-regular.ttf") format('truetype'),url("https://oknesset.org/static/font/Alef-regular.svg#alefregular") format('svg')}
 .fa{padding-left:.5em}
 #categories-list .fa::before{display:block;padding-left:0}

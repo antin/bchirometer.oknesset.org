@@ -1,4 +1,27 @@
 $ ->
+	# Some local routines.
+	parse_score=(e)->parseFloat $(e).data().score or 0
+	update_link_results=->
+		# Hide/disable nav to results (entire footer?) if no votes.
+		$ '.to-results'
+		.toggleClass 'disabled',$('#agendas button.selected:not(.indifferent)').length is 0
+		# Modify URL link to results page to contain votes so can bookmark, share…
+		$ '.to-results'
+		.attr 'href','#!results'+votes_serialize()
+	disable_category=->
+		# Mark category to indicate whether votes done in it.
+		#???... Don't use visible, parse ID instead, so results URL works too.
+		voted=$('#agendas button.selected:visible:not(.indifferent)').length # Find any dis/agree votes in current category.
+		$("#categories a[href=\"#{location.hash}\"]").toggleClass 'has-votes',voted isnt 0
+	votes_serialize=->
+		vs={}
+		$ '#agendas button.selected:not(.indifferent)'
+		.each ->
+			b=$ @
+			aid=b.parents('li').attr('id').slice 'agenda-'.length
+			vs[aid]=if b.hasClass 'agree' then 'y' else 'n'
+		JSON.stringify vs
+
 	# SPA with virtual pages.
 	show_page=(p)->
 		$('section').hide().filter(p).show()
@@ -45,7 +68,8 @@ $ ->
 				.addClass 'selected'
 				.siblings().removeClass 'selected'
 		# Guard against invalid votes.
-		unless $('#agendas button.selected:visible:not(.indifferent)').length then page '/'
+		unless $('#agendas button.selected:not(.indifferent)').length isnt 0 then page '/'
+		#???... Mark category buttons too!
 		# Wipe old final scores: reset to zeroes.
 		final={}
 		$ '#parties-list li'
@@ -94,28 +118,6 @@ $ ->
 	page '*',->show_page '#splash' # Root page, or anything else — take us "home".
 	page.start hashbang:yes # Begin listening to location changes.
 
-	# Some routines.
-	parse_score=(e)->parseFloat $(e).data().score or 0
-	update_link_results=->
-		# Hide/disable nav to results (entire footer?) if no votes.
-		$ '.to-results'
-		.toggleClass 'disabled',$('#agendas button.selected:not(.indifferent)').length is 0
-		# Modify URL link to results page to contain votes so can bookmark, share…
-		$ '.to-results'
-		.attr 'href','#!results'+votes_serialize()
-	disable_category=->
-		# Mark category to indicate whether votes done in it.
-		voted=$('#agendas button.selected:visible:not(.indifferent)').length # Find any dis/agree votes in current category.
-		$("#categories a[href=\"#{location.hash}\"]").toggleClass 'has-votes',voted isnt 0
-	votes_serialize=->
-		vs={}
-		$ '#agendas button.selected:not(.indifferent)'
-		.each ->
-			b=$ @
-			aid=b.parents('li').attr('id').slice 'agenda-'.length
-			vs[aid]=if b.hasClass 'agree' then 'y' else 'n'
-		JSON.stringify vs
-
 	# Voting buttons handler.
 	$ '#agendas-list'
 	.on 'click','button',(ev)->
@@ -129,7 +131,7 @@ $ ->
 		# Update stuff depending on number of votes.
 		disable_category()
 		update_link_results()
-	# Cancel votes button handler. #??? Removed.
+	###??? # Cancel votes button handler. #??? Removed.
 	$ '#cancel'
 	.click (ev)->
 		$ '#agendas button.selected:visible:not(.indifferent)'
@@ -141,6 +143,7 @@ $ ->
 		# Update stuff depending on number of votes.
 		disable_category()
 		update_link_results()
+	###
 	# Disable results button.
 	$ '.to-results'
 	.click (ev)->

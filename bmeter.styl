@@ -1,4 +1,7 @@
 // Bmeter styling…
+@import url(http://fonts.googleapis.com/earlyaccess/alefhebrew.css);
+//@import url(http://fonts.googleapis.com/css?family=Alef:400,700);
+
 // Color palette.
 blueish=#604dff
 darkblueish=#7290e0 //??? Was #4c3dcc, but Irit doesn't like it.
@@ -16,12 +19,17 @@ a
 	footer li &,
 	header li &
 		color inherit
+		&[href="#!categories"]
+			color darkblueish
+			font-size 120%
+			padding 0.8rem
 body
 	max-width 28em
 	margin 4em auto
+	padding 0 1em
 	background white
 	color black
-	font-family Alef,sans-serif
+	font-family "Alef Hebrew",sans-serif
 	overflow-y scroll //??? Replace with nicer, JS-based, scrollbar, eg: perfectscrollbar.js.
 button // Reset browser's defaults.
 	background transparent
@@ -73,6 +81,7 @@ header
 	height 3em
 	background darkgrayish
 	color white
+	z-index 2
 footer
 	bottom 0
 	top inherit
@@ -121,8 +130,6 @@ p
 				content " (לפרטים)"
 header
 	top 0
-	ol
-		margin 0
 	a
 		text-decoration inherit
 img
@@ -139,14 +146,22 @@ li
 		display block
 		clear both
 ol
-	header>&
-		list-style none
 	footer>&,
 	section>&
 		margin 0 auto
 		padding 0
 		text-align center
 		clear both
+	header>&
+		list-style none
+		margin 0
+		justify-content center
+		padding 0
+		display flex
+		flex-flow row nowrap
+		&>li
+			flex 0 0 auto
+			display block
 	&#parties-list //???
 		text-align start
 		//??? border  solid medium #604dff
@@ -174,9 +189,12 @@ section
 	border yellowish solid medium
 	&.selected
 		background yellowish
-.we-are img
-	height 5em
-	margin 0 1em
+.we-are
+	img
+		height 5em
+		margin 0 1em
+	li
+		display inline-block
 [data-page="#splash"]
 	background blueish
 	color white
@@ -215,7 +233,8 @@ section
 // Fonts.
 //??? Should use CDN instead! Either
 // <link href='http://fonts.googleapis.com/css?family=Alef:400,700' rel='stylesheet' type='text/css'>
-// or @import url(http://fonts.googleapis.com/css?family=Alef:400,700);
+// or
+/*
 @font-face
 	font-family 'Alef'
 	font-weight bold
@@ -228,7 +247,7 @@ section
 	font-style normal
 	src url(https://oknesset.org/static/font/Alef-regular.eot)
 	src url(https://oknesset.org/static/font/Alef-regular.eot?#iefix) format('embedded-opentype'), url(https://oknesset.org/static/font/Alef-regular.woff) format('woff'), url(https://oknesset.org/static/font/Alef-regular.ttf) format('truetype'), url(https://oknesset.org/static/font/Alef-regular.svg#alefregular) format('svg')
-
+*/
 // Fix FontAwesome's messing up our line-height.
 /*???
 .fa
