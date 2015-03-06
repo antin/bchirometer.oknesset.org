@@ -1,6 +1,6 @@
 // Bmeter styling…
+// Fonts.
 @import url(http://fonts.googleapis.com/earlyaccess/alefhebrew.css);
-//@import url(http://fonts.googleapis.com/css?family=Alef:400,700);
 
 // Color palette.
 blueish=#604dff
@@ -19,6 +19,7 @@ a
 	footer li &,
 	header li &
 		color inherit
+		margin 0 0.4em
 		&[href="#!categories"]
 			color darkblueish
 			font-size 120%
@@ -40,7 +41,7 @@ header a
 .button
 	display block
 	margin 0
-	padding 1em
+	padding 0.8em
 	vertical-align middle
 	text-align center
 	text-decoration inherit
@@ -146,19 +147,19 @@ li
 		display block
 		clear both
 ol
-	footer>&,
 	section>&
 		margin 0 auto
 		padding 0
 		text-align center
-		clear both
+		//???clear both
+	footer>&,
 	header>&
 		list-style none
 		margin 0
-		justify-content center
 		padding 0
 		display flex
 		flex-flow row nowrap
+		justify-content center
 		&>li
 			flex 0 0 auto
 			display block
@@ -175,7 +176,7 @@ section
 	&.selected
 		background greenish
 .bgi
-	background url(bg/podium-faded.jpg) no-repeat center top fixed
+	background url(bg/podium-blurred.jpg) no-repeat center top fixed
 	background-size cover
 .bg-toggle
 	position fixed
@@ -195,6 +196,8 @@ section
 		margin 0 1em
 	li
 		display inline-block
+[data-page="#agendas"]
+	background #e5e5e5
 [data-page="#splash"]
 	background blueish
 	color white
@@ -202,7 +205,7 @@ section
 [data-page="#categories"] header [href="#!categories"]
 [data-page="#qna"] header [href="#!qna"]
 [data-page="#splash"] header [href="/"]
-		color black
+	color black
 #agendas
 #results
 	margin-bottom 7em
@@ -230,35 +233,7 @@ section
 	p
 		text-align start
 
-// Fonts.
-//??? Should use CDN instead! Either
-// <link href='http://fonts.googleapis.com/css?family=Alef:400,700' rel='stylesheet' type='text/css'>
-// or
-/*
-@font-face
-	font-family 'Alef'
-	font-weight bold
-	font-style normal
-	src url(https://oknesset.org/static/font/Alef-bold.eot)
-	src url(https://oknesset.org/static/font/Alef-bold.eot?#iefix) format('embedded-opentype'), url(https://oknesset.org/static/font/Alef-bold.woff) format('woff'), url(https://oknesset.org/static/font/Alef-bold.ttf) format('truetype'), url(https://oknesset.org/static/font/Alef-bold.svg#alefbold) format('svg')
-@font-face
-	font-family 'Alef'
-	font-weight normal
-	font-style normal
-	src url(https://oknesset.org/static/font/Alef-regular.eot)
-	src url(https://oknesset.org/static/font/Alef-regular.eot?#iefix) format('embedded-opentype'), url(https://oknesset.org/static/font/Alef-regular.woff) format('woff'), url(https://oknesset.org/static/font/Alef-regular.ttf) format('truetype'), url(https://oknesset.org/static/font/Alef-regular.svg#alefregular) format('svg')
-*/
 // Fix FontAwesome's messing up our line-height.
-/*???
-.fa
-	font inherit !important
-.fa::before
-	font-family FontAwesome
-*/
-.fa
-	padding-left 0.5em
 .fa::before
 	#categories-list &
 		display block
-		padding-left 0
-		//??? padding-bottom 0.3em
