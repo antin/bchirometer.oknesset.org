@@ -176,8 +176,17 @@ $ ->
 		page n.attr 'href'
 
 	# Dynamically generated content.
+	###???
 	$ 'button.disagree'
-	.after $ '<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'
+	.after $ '<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>'
+	###
+	$ '#agendas-list>li'
+	.append $ """
+		<button type="button" class="agree">בעד</button>
+		<button type="button" class="indifferent selected">לא אכפת</button>
+		<button type="button" class="disagree">נגד</button>
+		<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>
+		"""
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	update_link_results()

@@ -201,7 +201,12 @@
       }
       return page(n.attr('href'));
     });
-    $('button.disagree').after($('<p><small>(* לחצי "לא אכפת" כדי לבטל הצבעה.)</small></p>'));
+
+    /*???
+    	$ 'button.disagree'
+    	.after $ '<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>'
+     */
+    $('#agendas-list>li').append($("<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">לא אכפת</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצ\\י \"לא אכפת\" כדי לבטל הצבעה.)</small></p>"));
     update_link_results();
     return $('.bg-toggle').click(function(ev) {
       ev.preventDefault();
