@@ -22,6 +22,15 @@ $ ->
 			vs[aid]=if b.hasClass 'agree' then 'y' else 'n'
 		JSON.stringify vs
 
+	# Dynamically generated content. (Run before paging, because need buttons in DOM.)
+	$ '#agendas-list>li'
+	.append $ """
+		<button type="button" class="agree">בעד</button>
+		<button type="button" class="indifferent selected">לא אכפת</button>
+		<button type="button" class="disagree">נגד</button>
+		<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>
+		"""
+
 	# SPA with virtual pages.
 	show_page=(p)->
 		$('section').hide().filter(p).show()
@@ -29,7 +38,8 @@ $ ->
 		window.scrollTo 0,0
 	page_turner=(p)->return ->return show_page p # Factory.
 	# Routing.
-	page.base '/'
+	page.base location.pathname #???
+	page 'splash:ref?',page_turner '#splash'
 	page 'about',page_turner '#about'
 	page 'qna',page_turner '#qna'
 	page 'categories',page_turner '#categories'
@@ -55,12 +65,13 @@ $ ->
 		show_page '#agendas'
 	page 'results:votes?',(context)-> # Nav to results page.
 		# Guard against missing votes: redirect home.
-		unless context.params.votes then page '/'
+		unless context.params.votes then console.log 'Missing votes; redirecting.'; page '#!splash'
 		# Extract votes from URL. Set voting buttons.
 		try
 			votes=$.parseJSON context.params.votes
-		catch _
-			return page '/'
+		catch e
+			console.log 'parseJSON failed:',e
+			return page '#!splash'
 		for own agenda,vote of votes
 			do (agenda,vote)->
 				v=if vote is 'y' then 'agree' else 'disagree'
@@ -68,16 +79,19 @@ $ ->
 				.addClass 'selected'
 				.siblings().removeClass 'selected'
 		# Guard against invalid votes.
-		unless $('#agendas button.selected:not(.indifferent)').length isnt 0 then page '/'
+		unless $('#agendas button.selected:not(.indifferent)').length isnt 0 then console.log 'No votes; redirecting.'; page '#!splash'
 		#???... Mark category buttons too!
 		# Wipe old final scores: reset to zeroes.
 		final={}
 		$ '#parties-list li'
 		.data 'score',0
+		.find 'h3 span'
+		.text '—'
+		###???
 		.find 'h3 img'
 		.attr 'src','meter/zero.png'
 		.siblings 'span'
-		.text '—'
+		###
 		# Recalculate final scores.
 		$ '#agendas-list>li'
 		.each ->
@@ -100,11 +114,14 @@ $ ->
 				#??? meter=switch
 				$ "#party-#{party}"
 				.data 'score',average
+				.find 'h3 span'
+				.text average.toFixed 1
+				.attr 'title','ממוצע של \u202d'+scores # Just for debugging?
+				###???
 				.find 'h3 img'
 				.attr 'src','meter/zero.png'
 				.siblings 'span'
-				.text average.toFixed 1
-				.attr 'title','ממוצע של \u202d'+scores # Just for debugging?
+				###
 		r=$ '#parties-list'
 		p=r.children().get()
 		.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
@@ -115,7 +132,7 @@ $ ->
 		# Only show best result's logo.
 		$('#parties-list li>img').hide().first().show()
 		show_page '#results'
-	page '*',->show_page '#splash' # Root page, or anything else — take us "home".
+	page '*',->console.log '404; redirecting.'; page '#!splash' # Anything else — redirect to home page.
 	page.start hashbang:yes # Begin listening to location changes.
 
 	# Voting buttons handler.
@@ -174,19 +191,6 @@ $ ->
 		n=$("#categories-list a[href=\"#{location.hash}\"]").parent().next().find 'a'
 		if n.length is 0 then n=$("#categories-list a").first()
 		page n.attr 'href'
-
-	# Dynamically generated content.
-	###???
-	$ 'button.disagree'
-	.after $ '<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>'
-	###
-	$ '#agendas-list>li'
-	.append $ """
-		<button type="button" class="agree">בעד</button>
-		<button type="button" class="indifferent selected">לא אכפת</button>
-		<button type="button" class="disagree">נגד</button>
-		<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>
-		"""
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	update_link_results()

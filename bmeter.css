@@ -25,7 +25,7 @@ h3{margin:1.5rem 0 0}
 h4,small{font-size:small}
 h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
 #agendas h4.synopsis,#agendas p.synopsis{display:block;}
-#agendas h4.synopsis a:after,#agendas p.synopsis a:after{content:" (לפרטים)"}
+#agendas h4.synopsis a:after,#agendas p.synopsis a:after{content:"(לפרטים)"}
 header{top:0;}
 header a{text-decoration:inherit}
 #parties-list img{display:block;width:18em;height:4em;margin:.5em auto}

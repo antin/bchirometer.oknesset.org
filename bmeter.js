@@ -28,6 +28,7 @@
       });
       return JSON.stringify(vs);
     };
+    $('#agendas-list>li').append($("<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">לא אכפת</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצ\\י \"לא אכפת\" כדי לבטל הצבעה.)</small></p>"));
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').attr('data-page', p);
@@ -38,7 +39,8 @@
         return show_page(p);
       };
     };
-    page.base('/');
+    page.base(location.pathname);
+    page('splash:ref?', page_turner('#splash'));
     page('about', page_turner('#about'));
     page('qna', page_turner('#qna'));
     page('categories', page_turner('#categories'));
@@ -58,15 +60,17 @@
       return show_page('#agendas');
     });
     page('results:votes?', function(context) {
-      var agenda, final, p, party, r, scores, vote, votes, _, _fn, _fn1;
+      var agenda, e, final, p, party, r, scores, vote, votes, _fn, _fn1;
       if (!context.params.votes) {
-        page('/');
+        console.log('Missing votes; redirecting.');
+        page('#!splash');
       }
       try {
         votes = $.parseJSON(context.params.votes);
       } catch (_error) {
-        _ = _error;
-        return page('/');
+        e = _error;
+        console.log('parseJSON failed:', e);
+        return page('#!splash');
       }
       _fn = function(agenda, vote) {
         var v;
@@ -79,10 +83,17 @@
         _fn(agenda, vote);
       }
       if ($('#agendas button.selected:not(.indifferent)').length === 0) {
-        page('/');
+        console.log('No votes; redirecting.');
+        page('#!splash');
       }
       final = {};
-      $('#parties-list li').data('score', 0).find('h3 img').attr('src', 'meter/zero.png').siblings('span').text('—');
+      $('#parties-list li').data('score', 0).find('h3 span').text('—');
+
+      /*???
+      		.find 'h3 img'
+      		.attr 'src','meter/zero.png'
+      		.siblings 'span'
+       */
       $('#agendas-list>li').each(function() {
         var a, dis_agree, party, ps, score, _results;
         a = $(this);
@@ -114,7 +125,13 @@
           return x + y;
         });
         average = sum / scores.length;
-        return $("#party-" + party).data('score', average).find('h3 img').attr('src', 'meter/zero.png').siblings('span').text(average.toFixed(1)).attr('title', 'ממוצע של \u202d' + scores);
+        return $("#party-" + party).data('score', average).find('h3 span').text(average.toFixed(1)).attr('title', 'ממוצע של \u202d' + scores);
+
+        /*???
+        				.find 'h3 img'
+        				.attr 'src','meter/zero.png'
+        				.siblings 'span'
+         */
       };
       for (party in final) {
         if (!__hasProp.call(final, party)) continue;
@@ -135,7 +152,8 @@
       return show_page('#results');
     });
     page('*', function() {
-      return show_page('#splash');
+      console.log('404; redirecting.');
+      return page('#!splash');
     });
     page.start({
       hashbang: true
@@ -201,12 +219,6 @@
       }
       return page(n.attr('href'));
     });
-
-    /*???
-    	$ 'button.disagree'
-    	.after $ '<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>'
-     */
-    $('#agendas-list>li').append($("<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">לא אכפת</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצ\\י \"לא אכפת\" כדי לבטל הצבעה.)</small></p>"));
     update_link_results();
     return $('.bg-toggle').click(function(ev) {
       ev.preventDefault();
