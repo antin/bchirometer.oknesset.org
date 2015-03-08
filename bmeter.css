@@ -32,7 +32,7 @@ header a{text-decoration:inherit}
 li{display:inline-block;}
 #about li,#qna li,#parties-list li{display:block;clear:both}
 section>ol{margin:0 auto;padding:0;text-align:center}
-footer>ol,header>ol{list-style:none;margin:0;padding:0;display:flex;flex-flow:row nowrap;justify-content:center;}
+footer>ol,header>ol{list-style:none;margin:0;padding:0;display:flex;-webkit-flex-direction:row;flex-flow:row nowrap;justify-content:center;}
 footer>ol>li,header>ol>li{flex:0 0 auto;display:block}
 ol#parties-list{text-align:start}
 section,.collapsed{display:none}
@@ -54,6 +54,6 @@ section,.collapsed{display:none}
 #agendas-list>li{width:100%;text-align:start}
 #parties-list h3 img{float:left;height:1em;width:2em}
 #parties-list h3 span{display:inline-block;width:4em;direction:ltr}
-#splash{text-align:center;}
-#splash p{text-align:start}
+#splash,#agendas-list>li>div{text-align:center;}
+#splash p,#agendas-list>li>div p{text-align:start}
 #categories-list .fa::before{display:block}

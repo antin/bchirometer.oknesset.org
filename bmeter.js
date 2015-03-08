@@ -9,8 +9,12 @@
       return parseFloat($(e).data().score || 0);
     };
     update_link_results = function() {
-      $('.to-results').toggleClass('disabled', $('#agendas button.selected:not(.indifferent)').length === 0);
-      return $('.to-results').attr('href', '#!results' + votes_serialize());
+      var total, voted;
+      voted = $('#agendas button.selected:not(.indifferent)').length;
+      total = $('#agendas-list>li').length;
+      $('.to-results').toggleClass('disabled', voted === 0);
+      $('.to-results').attr('href', '#!results' + votes_serialize());
+      return $('#progress').text("(הצבעת ל-" + voted + " מתוך " + total + " אג'נדות)");
     };
     disable_category = function() {
       var voted;
@@ -28,7 +32,7 @@
       });
       return JSON.stringify(vs);
     };
-    $('#agendas-list>li').append($("<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">לא אכפת</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצ\\י \"לא אכפת\" כדי לבטל הצבעה.)</small></p>"));
+    $('#agendas-list>li').append($("<div>\n<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">לא אכפת</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצו \"לא אכפת\" כדי לבטל הצבעה.)</small></p></div>"));
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').attr('data-page', p);

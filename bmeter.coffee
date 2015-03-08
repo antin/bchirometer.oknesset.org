@@ -2,12 +2,17 @@ $ ->
 	# Some local routines.
 	parse_score=(e)->parseFloat $(e).data().score or 0
 	update_link_results=->
+		voted=$('#agendas button.selected:not(.indifferent)').length
+		total=$('#agendas-list>li').length
 		# Hide/disable nav to results (entire footer?) if no votes.
 		$ '.to-results'
-		.toggleClass 'disabled',$('#agendas button.selected:not(.indifferent)').length is 0
+		.toggleClass 'disabled',voted is 0
 		# Modify URL link to results page to contain votes so can bookmark, share…
 		$ '.to-results'
 		.attr 'href','#!results'+votes_serialize()
+		# Show progress (count votes).
+		$ '#progress'
+		.text "(הצבעת ל-#{voted} מתוך #{total} אג'נדות)"
 	disable_category=->
 		# Mark category to indicate whether votes done in it.
 		#???... Don't use visible, parse ID instead, so results URL works too.
@@ -24,11 +29,11 @@ $ ->
 
 	# Dynamically generated content. (Run before paging, because need buttons in DOM.)
 	$ '#agendas-list>li'
-	.append $ """
+	.append $ """<div>
 		<button type="button" class="agree">בעד</button>
 		<button type="button" class="indifferent selected">לא אכפת</button>
 		<button type="button" class="disagree">נגד</button>
-		<p><small>(* לחצ\\י "לא אכפת" כדי לבטל הצבעה.)</small></p>
+		<p><small>(* לחצו "לא אכפת" כדי לבטל הצבעה.)</small></p></div>
 		"""
 
 	# SPA with virtual pages.
