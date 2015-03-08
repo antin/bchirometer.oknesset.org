@@ -13,9 +13,9 @@ task 'run','Just run web server (don\'t rebuild)',->launch 'http-server'
 task 'stage','Deploy to staging site on WebFaction',->stage ->console.log ':-)'.green
 
 # Build all client side assets: CoffeeScript, Stylus… #??? Add linting for all, and uglify, combine.
-build=(watch,next)->
-	if typeof watch is 'function' then next=watch;watch=false
-	build_styl watch,->build_cs watch,next
+build=(next)->
+	#??? if typeof watch is 'function' then next=watch;watch=false
+	build_styl ->build_cs ->next?()
 # Compile CoffeeScript into JavaScript.
 build_cs=(next)-> #??? (watch,next)->
 	#??? if typeof watch is 'function' then next=watch;watch=false
@@ -41,7 +41,7 @@ launch=(cmd,options=[],next)->
 	app.stdout.pipe process.stdout
 	app.stderr.pipe process.stderr
 	app.on 'exit',(status)->
-		if status is 0 then next() #??? Must exist?
+		if status is 0 then next?() #??? Must exist?
 		else console.log 'Error:'.red.inverse+" exit code #{status} from #{cmd}"
 		#??? else process.exit status #???!!! Don't, let caller decide! No, they'll always do the same; DRY.
 # Run in a shell???...

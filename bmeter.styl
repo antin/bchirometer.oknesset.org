@@ -160,6 +160,7 @@ ol
 		margin 0
 		padding 0
 		display flex
+		-webkit-flex-direction row // Safari bug workaround. PrefixFree didn't handle it.
 		flex-flow row nowrap
 		justify-content center
 		&>li
