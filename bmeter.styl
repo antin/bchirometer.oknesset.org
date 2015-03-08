@@ -1,0 +1,248 @@
+// Bmeter styling…
+
+// Fonts.
+@import url(http://fonts.googleapis.com/earlyaccess/alefhebrew.css);
+
+// Color palette.
+blueish=#604dff
+darkblueish=#7290e0 //??? Was #4c3dcc, but Irit doesn't like it.
+darkgrayish=#424242
+pale=#aec1f5 //??? Was #c7c2f7
+grayish=#c7c2f7
+greenish=#009b42
+redish=#f95554
+yellowish=#f9c400
+yellowdisabled=#e0e0c3
+facebookcolor=#4466a3
+twittercolor=#98e2fd
+
+// Layouts and stuff.
+a
+	footer li &,
+	header li &
+		color inherit
+		margin 0 0.4em
+		&[href="#!categories"]
+			color darkblueish
+			font-size 120%
+			padding 0.8rem
+body
+	max-width 28em
+	margin 4em auto
+	padding 0 1em
+	background white
+	color black
+	font-family "Alef Hebrew",sans-serif
+	overflow-y scroll //??? Replace with nicer, JS-based, scrollbar, eg: perfectscrollbar.js.
+button // Reset browser's defaults.
+	background transparent
+	font-family inherit
+button
+footer a
+header a
+.button
+	display block
+	margin 0
+	padding 0.8em
+	vertical-align middle
+	text-align center
+	text-decoration inherit
+	border none
+	border-radius 0.3em
+	outline none
+	box-sizing border-box
+	&.fa::before
+		padding-left 0.5em
+	#agendas-list &,
+	#splash &
+		display inline-block
+	#splash>:not(footer) &
+		background white
+		color darkblueish
+footer a
+#categories-list a
+#about .button
+#qna .button
+	background darkblueish
+	color white
+#categories-list a
+	width 8em
+	height 6em
+	margin 0.3em
+	&.has-votes
+		background pale //??? rename this const!
+.button
+	background white
+	color black
+footer
+header
+	position fixed
+	right 0
+	left 0
+	text-align center
+	width 100%
+	height 3em
+	background darkgrayish
+	color white
+	z-index 2
+footer
+	bottom 0
+	top inherit
+	background darkblueish
+	border-top solid medium white
+	#agendas &,
+	#categories &
+		background white
+		a
+			background #e8e860 //??? Yuck.
+			color black
+			&.disabled
+				background yellowdisabled
+	#results &
+		height inherit
+		background #e8e860
+		color black
+		a
+			font-size 1.5em
+			padding 0
+		a
+		ol
+			background white
+h1
+	font-size 3em
+h1
+h2
+	margin 1rem auto
+	text-align center
+h3
+	margin 1.5rem 0 0
+h4
+small
+	font-size small
+h4
+p
+	margin 0.5em 0
+	font-weight normal
+	word-wrap break-word
+	#agendas &
+		//??? display none //??? Hidden initially; put [hidden] attribute in HTML instead?
+		&.synopsis
+			display block //???
+			//??? margin 2em 0
+			& a:after
+				content "(לפרטים)"
+header
+	top 0
+	a
+		text-decoration inherit
+img
+	#parties-list &
+		display block
+		width 18em
+		height 4em
+		margin 0.5em auto
+li
+	display inline-block //??? Invert, overrides?
+	#about &,
+	#qna &,
+	#parties-list &
+		display block
+		clear both
+ol
+	section:not(#qna)>&:not(#parties-list)
+		margin 0 auto
+		padding 0
+		text-align center
+		//???clear both
+	footer>&,
+	header>&
+		list-style none
+		margin 0
+		padding 0
+		display flex
+		-webkit-flex-direction row // Safari bug workaround. PrefixFree didn't handle it.
+		flex-flow row nowrap
+		justify-content center
+		&>li
+			flex 0 0 auto
+			display block
+	/*??? Weird overrides?
+	&#parties-list
+	#qna &
+		text-align start
+		//??? border  solid medium #604dff
+		//??? padding 1em
+	*/
+section
+.collapsed
+//??? [hidden]
+	display none
+.agree
+	border greenish solid medium
+	&.selected
+		background greenish
+.bgi
+	background url(bg/podium-faded.jpg) no-repeat center top fixed
+	background-size cover
+.bg-toggle
+	position fixed
+	bottom 4em
+	right 2em
+.disagree
+	border redish solid medium
+	&.selected
+		background redish
+.indifferent
+	border yellowish solid medium
+	&.selected
+		background yellowish
+.we-are
+	img
+		height 5em
+		margin 0 1em
+	li
+		display inline-block
+/*???
+[data-page="#agendas"]
+	background #e5e5e5
+*/
+[data-page="#splash"]
+	background blueish
+	color white
+[data-page="#about"] header [href="#!about"]
+[data-page="#categories"] header [href="#!categories"]
+[data-page="#qna"] header [href="#!qna"]
+[data-page="#splash"] header [href="/"]
+	color black
+#agendas
+#results
+	margin-bottom 7em
+#agendas>button,
+#agendas>.button
+	float left
+	background pale
+	color black
+#agendas h2 i
+	padding-left 0.5em
+#agendas-list>li
+	width 100%
+	text-align start
+#parties-list h3
+	img
+		float left
+		height 1em
+		width 2em
+	span
+		display inline-block
+		width 4em
+		direction ltr
+#splash
+#agendas-list>li>div
+	text-align center
+	p
+		text-align start
+
+// Fix FontAwesome's messing up our line-height.
+.fa::before
+	#categories-list &
+		display block

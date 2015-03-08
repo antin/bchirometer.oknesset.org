@@ -1,136 +1,58 @@
-.sprite,
-.agenda_item .ui-slider-plus-button,
-.agenda_item .ui-slider-minus-button,
-.agenda_item .ui-slider.minus .ui-slider-handle.ui-state-default,
-.agenda_item .ui-slider.plus .ui-slider-handle.ui-state-default,
-.agenda_item .ui-slider-handle.ui-state-default {
-    background-image: url(./static/sprite-02.png) !important; /*needed to bypase madac style*/
-}
-.icon-notice{ background-position: 0 -225px; width: 20px; height: 20px; }
-.icon-fb{ background-position: 0 -295px; width: 20px; height: 21px; }
-.icon-ok{ background-position: 0 -366px; width: 20px; height: 21px; }
-.icon-person{ background-position: 0 -437px; width: 20px; height: 20px; }
-.icon-web{ background-position: 0 -507px; width: 20px; height: 18px; }
-.icon-minus,
-.agenda_item .ui-slider-minus-button{
-    background-position: 0 -658px; width: 22px; height: 22px;
-}
-.icon-plus,
-.agenda_item .ui-slider-plus-button{
-    background-position: 0 -730px; width: 22px; height: 22px;
-}
-.icon-extra-info{
-    background-position: 0 0; width: 20px; height: 21px;
-}
-.icon-grey_handle,
-.agenda_item .ui-slider-handle.ui-state-default{
-    background-position: 0 -148px; width: 27px; height: 27px;
-}
-.icon-blue_handle,
-.agenda_item .ui-slider.plus .ui-slider-handle.ui-state-default{
-    background-position: 0 -71px; width: 27px; height: 27px;
-}
-.icon-yellow_handle,
-.agenda_item .ui-slider.minus .ui-slider-handle.ui-state-default{
-    background-position: 0 -802px; width: 28px; height: 28px;
-}
-
-.main-logo{ background-position: 0 -575px; width: 142px; height: 33px; }
-
-.page_top_bar .text .main-logo {
-    display : inline-block;
-    margin-top : -5px;
-    margin-right : 19px;
-    vertical-align : middle;
-}
-
-.main_top {
-    background-image: none;
-    height: auto;
-}
-.instructions {
-    margin : 0 17px 0 0;
-    width: 100%;
-}
-.instructions .caption {
-    width : auto;
-}
-.instructions .remark {
-    width : auto;
-}
-.instructions .clear_selection {
-    color : #00507F;
-    font-size : 10px;
-    text-decoration: underline;
-    font-weight : 400;
-    margin : 3px 12px 0 0;
-    opacity: 0.5;
-}
-.agenda_item .icon-extra-info {
-    display : inline-block;
-    position : relative;
-    vertical-align : top;
-}
-.half_candidates_pane .title{
-    color: #03537e;
-    margin-right: 10px;
-}
-
-
-.candidate_instance.selected .content {
-    background-color: white;
-    border-color : #00a651;
-    border-width : 3px;
-    box-shadow: 0 0 0 1px black;
-}
-.candidate_instance .party-image img {
-    max-height : 60px;
-    max-width: 120px;
-}
-
-.candidate_instance .party-image {
-    display: inline-block;
-    margin-left : 10px;
-}
-
-.candidate_instance.selected .party-image {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.candidate_instance.selected .party-image img {
-    max-height : 80px;
-    max-width: 200px;
-}
-.candidate_instance .party-info {
-    position : relative;
-    width: 100%;
-    display: inline-block;
-}
-.candidate_instance .party-info .name {
-    vertical-align : top;
-}
-.candidate_instance.selected .party-info .name {
-    margin-right: 30px;
-    width: 120px;
-    display: inline-block;
-}
-.candidate_instance.selected .links {
-    margin-right : 30px;
-}
-.candidate_instance .party-score {
-    left : 0;
-    top : 0;
-}
-.candidate_instance.selected .party-score {
-    position: static;
-    display: inline-block;
-    margin-right: 10px;
-}
-.candidate_instance .links .icon {
-    margin: 5px -6px -7px 3px
-}
-.social_bar.top {
-    margin-top : 0;
-}
+@import url("http://fonts.googleapis.com/earlyaccess/alefhebrew.css");
+footer li a,header li a{color:inherit;margin:0 .4em;}
+footer li a[href="#!categories"],header li a[href="#!categories"]{color:#7290e0;font-size:120%;padding:.8rem}
+body{max-width:28em;margin:4em auto;padding:0 1em;background:#fff;color:#000;font-family:"Alef Hebrew",sans-serif;overflow-y:scroll}
+button{background:transparent;font-family:inherit}
+button,footer a,header a,.button{display:block;margin:0;padding:.8em;vertical-align:middle;text-align:center;text-decoration:inherit;border:none;border-radius:.3em;outline:none;box-sizing:border-box;}
+button.fa::before,footer a.fa::before,header a.fa::before,.button.fa::before{padding-left:.5em}
+#agendas-list button,#agendas-list footer a,#agendas-list header a,#agendas-list .button,#splash button,#splash footer a,#splash header a,#splash .button{display:inline-block}
+#splash>:not(footer) button,#splash>:not(footer) footer a,#splash>:not(footer) header a,#splash>:not(footer) .button{background:#fff;color:#7290e0}
+footer a,#categories-list a,#about .button,#qna .button{background:#7290e0;color:#fff}
+#categories-list a{width:8em;height:6em;margin:.3em;}
+#categories-list a.has-votes{background:#aec1f5}
+.button{background:#fff;color:#000}
+footer,header{position:fixed;right:0;left:0;text-align:center;width:100%;height:3em;background:#424242;color:#fff;z-index:2}
+footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff;}
+#agendas footer,#categories footer{background:#fff;}
+#agendas footer a,#categories footer a{background:#e8e860;color:#000;}
+#agendas footer a.disabled,#categories footer a.disabled{background:#e0e0c3}
+#results footer{height:inherit;background:#e8e860;color:#000;}
+#results footer a{font-size:1.5em;padding:0}
+#results footer a,#results footer ol{background:#fff}
+h1{font-size:3em}
+h1,h2{margin:1rem auto;text-align:center}
+h3{margin:1.5rem 0 0}
+h4,small{font-size:small}
+h4,p{margin:.5em 0;font-weight:normal;word-wrap:break-word;}
+#agendas h4.synopsis,#agendas p.synopsis{display:block;}
+#agendas h4.synopsis a:after,#agendas p.synopsis a:after{content:"(לפרטים)"}
+header{top:0;}
+header a{text-decoration:inherit}
+#parties-list img{display:block;width:18em;height:4em;margin:.5em auto}
+li{display:inline-block;}
+#about li,#qna li,#parties-list li{display:block;clear:both}
+section:not(#qna)>ol:not(#parties-list){margin:0 auto;padding:0;text-align:center}
+footer>ol,header>ol{list-style:none;margin:0;padding:0;display:flex;-webkit-flex-direction:row;flex-flow:row nowrap;justify-content:center;}
+footer>ol>li,header>ol>li{flex:0 0 auto;display:block}
+section,.collapsed{display:none}
+.agree{border:#009b42 solid medium;}
+.agree.selected{background:#009b42}
+.bgi{background:url("bg/podium-faded.jpg") no-repeat center top fixed;background-size:cover}
+.bg-toggle{position:fixed;bottom:4em;right:2em}
+.disagree{border:#f95554 solid medium;}
+.disagree.selected{background:#f95554}
+.indifferent{border:#f9c400 solid medium;}
+.indifferent.selected{background:#f9c400}
+.we-are img{height:5em;margin:0 1em}
+.we-are li{display:inline-block}
+[data-page="#splash"]{background:#604dff;color:#fff}
+[data-page="#about"] header [href="#!about"],[data-page="#categories"] header [href="#!categories"],[data-page="#qna"] header [href="#!qna"],[data-page="#splash"] header [href="/"]{color:#000}
+#agendas,#results{margin-bottom:7em}
+#agendas>button,#agendas>.button{float:left;background:#aec1f5;color:#000}
+#agendas h2 i{padding-left:.5em}
+#agendas-list>li{width:100%;text-align:start}
+#parties-list h3 img{float:left;height:1em;width:2em}
+#parties-list h3 span{display:inline-block;width:4em;direction:ltr}
+#splash,#agendas-list>li>div{text-align:center;}
+#splash p,#agendas-list>li>div p{text-align:start}
+#categories-list .fa::before{display:block}
