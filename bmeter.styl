@@ -149,7 +149,7 @@ li
 		display block
 		clear both
 ol
-	section>&
+	section:not(#qna)>&:not(#parties-list)
 		margin 0 auto
 		padding 0
 		text-align center
@@ -166,10 +166,13 @@ ol
 		&>li
 			flex 0 0 auto
 			display block
-	&#parties-list //???
+	/*??? Weird overrides?
+	&#parties-list
+	#qna &
 		text-align start
 		//??? border  solid medium #604dff
 		//??? padding 1em
+	*/
 section
 .collapsed
 //??? [hidden]

@@ -199,10 +199,3 @@ $ ->
 
 	# Stuff that needs to be initially hidden. #??? Use new [hidden] attribute? Polyfill it?
 	update_link_results()
-
-	#??? Backdoors!
-	$ '.bg-toggle'
-	.click (ev)->
-		ev.preventDefault() # Not a real (nav) link.
-		$ 'body'
-		.toggleClass 'bgi'

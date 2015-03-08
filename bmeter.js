@@ -223,11 +223,7 @@
       }
       return page(n.attr('href'));
     });
-    update_link_results();
-    return $('.bg-toggle').click(function(ev) {
-      ev.preventDefault();
-      return $('body').toggleClass('bgi');
-    });
+    return update_link_results();
   });
 
 }).call(this);

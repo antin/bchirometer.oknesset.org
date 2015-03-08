@@ -31,10 +31,9 @@ header a{text-decoration:inherit}
 #parties-list img{display:block;width:18em;height:4em;margin:.5em auto}
 li{display:inline-block;}
 #about li,#qna li,#parties-list li{display:block;clear:both}
-section>ol{margin:0 auto;padding:0;text-align:center}
+section:not(#qna)>ol:not(#parties-list){margin:0 auto;padding:0;text-align:center}
 footer>ol,header>ol{list-style:none;margin:0;padding:0;display:flex;-webkit-flex-direction:row;flex-flow:row nowrap;justify-content:center;}
 footer>ol>li,header>ol>li{flex:0 0 auto;display:block}
-ol#parties-list{text-align:start}
 section,.collapsed{display:none}
 .agree{border:#009b42 solid medium;}
 .agree.selected{background:#009b42}
