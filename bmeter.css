@@ -32,7 +32,7 @@ header a{text-decoration:inherit}
 li{display:inline-block;}
 #about li,#qna li,#parties-list li{display:block;clear:both}
 section:not(#qna)>ol:not(#parties-list){margin:0 auto;padding:0;text-align:center}
-footer>ol,header>ol{list-style:none;margin:0;padding:0;display:flex;-webkit-flex-direction:row;flex-flow:row nowrap;justify-content:center;}
+footer>ol,header>ol{list-style:none;margin:0;padding:0;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex;-webkit-flex-direction:row;-webkit-flex-wrap:nowrap;flex-flow:row nowrap;justify-content:center;}
 footer>ol>li,header>ol>li{flex:0 0 auto;display:block}
 section,.collapsed{display:none}
 .agree{border:#009b42 solid medium;}

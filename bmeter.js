@@ -195,8 +195,9 @@
      */
     $('.to-results').click(function(ev) {
       if ($(this).hasClass('disabled')) {
-        return ev.preventDefault();
+        ev.preventDefault();
       }
+      return ga('send', 'event', 'survey', 'show-results', 'votes-for-agendas:' + votes_serialize());
     });
     $('a.expand').click(function(ev) {
       var id;

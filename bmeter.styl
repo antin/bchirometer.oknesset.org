@@ -159,8 +159,14 @@ ol
 		list-style none
 		margin 0
 		padding 0
-		display flex
+		//??? Ugly hacks around stupid browsers?
+		display -webkit-box // OLD - iOS 6-, Safari 3.1-6
+		display -moz-box // OLD - Firefox 19- (buggy but mostly works)
+		display -ms-flexbox // TWEENER - IE 10
+		display -webkit-flex // NEW - Chrome
+		display flex // CORRECT, official spec: Opera 12.1, Firefox 20+
 		-webkit-flex-direction row // Safari bug workaround. PrefixFree didn't handle it.
+		-webkit-flex-wrap nowrap
 		flex-flow row nowrap
 		justify-content center
 		&>li

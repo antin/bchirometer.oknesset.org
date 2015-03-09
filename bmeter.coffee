@@ -170,6 +170,7 @@ $ ->
 	$ '.to-results'
 	.click (ev)->
 		if $(@).hasClass 'disabled' then ev.preventDefault()
+		ga 'send','event','survey','show-results','votes-for-agendas:'+votes_serialize()
 	# Expansion clicks.
 	$ 'a.expand'
 	.click (ev)->
