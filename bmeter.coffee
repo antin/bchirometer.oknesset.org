@@ -102,9 +102,9 @@ $ ->
 		.each ->
 			a=$ @
 			# Voted?
-			if a.children('button.selected:not(.indifferent)').length isnt 0
+			if a.find('button.selected:not(.indifferent)').length isnt 0
 				dis_agree=switch
-					when a.children('button.selected.agree').length isnt 0 then 1.0
+					when a.find('button.selected.agree').length isnt 0 then 1.0
 					else -1.0
 				ps=$.parseJSON a.attr 'data-parties-scores'
 				for own party,score of ps

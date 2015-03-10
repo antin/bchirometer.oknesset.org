@@ -101,10 +101,10 @@
       $('#agendas-list>li').each(function() {
         var a, dis_agree, party, ps, score, _results;
         a = $(this);
-        if (a.children('button.selected:not(.indifferent)').length !== 0) {
+        if (a.find('button.selected:not(.indifferent)').length !== 0) {
           dis_agree = (function() {
             switch (false) {
-              case a.children('button.selected.agree').length === 0:
+              case a.find('button.selected.agree').length === 0:
                 return 1.0;
               default:
                 return -1.0;
