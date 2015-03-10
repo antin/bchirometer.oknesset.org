@@ -17,8 +17,9 @@ footer{bottom:0;top:inherit;background:#7290e0;border-top:solid medium #fff;}
 #agendas footer a,#categories footer a{background:#e8e860;color:#000;}
 #agendas footer a.disabled,#categories footer a.disabled{background:#e0e0c3}
 #results footer{height:inherit;background:#e8e860;color:#000;}
-#results footer a{font-size:1.5em;padding:0}
+#results footer a{padding:0}
 #results footer a,#results footer ol{background:#fff}
+#results footer p{margin:0 auto}
 h1{font-size:3em}
 h1,h2{margin:1rem auto;text-align:center}
 h3{margin:1.5rem 0 0}

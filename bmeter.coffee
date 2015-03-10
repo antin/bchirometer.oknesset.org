@@ -8,11 +8,15 @@ $ ->
 		$ '.to-results'
 		.toggleClass 'disabled',voted is 0
 		# Modify URL link to results page to contain votes so can bookmark, share…
+		results_link='#!results'+votes_serialize()
 		$ '.to-results'
-		.attr 'href','#!results'+votes_serialize()
+		.attr 'href',results_link
 		# Show progress (count votes).
 		$ '#progress'
 		.text "(הצבעת ל-#{voted} מתוך #{total} אג'נדות)"
+		# Update FB share link.
+		$ '#results footer a[title="Facebook"]'
+		.attr href:"https://www.facebook.com/sharer/sharer.php?app_id=102113249964274&u=#{location.origin+location.pathname+results_link}&display=popup&ref=plugin"
 	disable_category=->
 		# Mark category to indicate whether votes done in it.
 		#???... Don't use visible, parse ID instead, so results URL works too.
@@ -153,19 +157,6 @@ $ ->
 		# Update stuff depending on number of votes.
 		disable_category()
 		update_link_results()
-	###??? # Cancel votes button handler. #??? Removed.
-	$ '#cancel'
-	.click (ev)->
-		$ '#agendas button.selected:visible:not(.indifferent)'
-		.each ->
-			$ @
-			.removeClass 'selected'
-			.siblings '.indifferent'
-			.addClass 'selected'
-		# Update stuff depending on number of votes.
-		disable_category()
-		update_link_results()
-	###
 	# Disable results button.
 	$ '.to-results'
 	.click (ev)->
@@ -180,15 +171,6 @@ $ ->
 		#??? .next 'span'
 		$ id
 		.toggle()
-	###??? Replace this with 'expand' handler.
-	$ '.synopsis a'
-	.click (ev)->
-		ev.preventDefault()
-		$ @
-		.parents '#agendas-list>li'
-		.children 'h4,p:not(.synopsis)'
-		.toggle()
-	###
 	# Next category.
 	$ '#next'
 	.click (ev)->

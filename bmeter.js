@@ -9,12 +9,16 @@
       return parseFloat($(e).data().score || 0);
     };
     update_link_results = function() {
-      var total, voted;
+      var results_link, total, voted;
       voted = $('#agendas button.selected:not(.indifferent)').length;
       total = $('#agendas-list>li').length;
       $('.to-results').toggleClass('disabled', voted === 0);
-      $('.to-results').attr('href', '#!results' + votes_serialize());
-      return $('#progress').text("(הצבעת ל-" + voted + " מתוך " + total + " אג'נדות)");
+      results_link = '#!results' + votes_serialize();
+      $('.to-results').attr('href', results_link);
+      $('#progress').text("(הצבעת ל-" + voted + " מתוך " + total + " אג'נדות)");
+      return $('#results footer a[title="Facebook"]').attr({
+        href: "https://www.facebook.com/sharer/sharer.php?app_id=102113249964274&u=" + (location.origin + location.pathname + results_link) + "&display=popup&ref=plugin"
+      });
     };
     disable_category = function() {
       var voted;
@@ -179,20 +183,6 @@
       disable_category();
       return update_link_results();
     });
-
-    /*??? # Cancel votes button handler. #??? Removed.
-    	$ '#cancel'
-    	.click (ev)->
-    		$ '#agendas button.selected:visible:not(.indifferent)'
-    		.each ->
-    			$ @
-    			.removeClass 'selected'
-    			.siblings '.indifferent'
-    			.addClass 'selected'
-    		 * Update stuff depending on number of votes.
-    		disable_category()
-    		update_link_results()
-     */
     $('.to-results').click(function(ev) {
       if ($(this).hasClass('disabled')) {
         ev.preventDefault();
@@ -205,16 +195,6 @@
       id = $(ev.target).attr('href');
       return $(id).toggle();
     });
-
-    /*??? Replace this with 'expand' handler.
-    	$ '.synopsis a'
-    	.click (ev)->
-    		ev.preventDefault()
-    		$ @
-    		.parents '#agendas-list>li'
-    		.children 'h4,p:not(.synopsis)'
-    		.toggle()
-     */
     $('#next').click(function(ev) {
       var n;
       ev.preventDefault();
