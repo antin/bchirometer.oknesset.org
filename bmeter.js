@@ -32,7 +32,7 @@
       });
       return JSON.stringify(vs);
     };
-    $('#agendas-list>li').append($("<div>\n<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">לא אכפת</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצו \"לא אכפת\" כדי לבטל הצבעה.)</small></p></div>"));
+    $('#agendas-list>li').append($("<div>\n<button type=\"button\" class=\"agree\">בעד</button>\n<button type=\"button\" class=\"indifferent selected\">נמנע</button>\n<button type=\"button\" class=\"disagree\">נגד</button>\n<p><small>(* לחצו \"נמנע\" כדי לבטל הצבעה.)</small></p></div>"));
     show_page = function(p) {
       $('section').hide().filter(p).show();
       $('body').attr('data-page', p);
@@ -101,10 +101,10 @@
       $('#agendas-list>li').each(function() {
         var a, dis_agree, party, ps, score, _results;
         a = $(this);
-        if (a.children('button.selected:not(.indifferent)').length !== 0) {
+        if (a.find('button.selected:not(.indifferent)').length !== 0) {
           dis_agree = (function() {
             switch (false) {
-              case a.children('button.selected.agree').length === 0:
+              case a.find('button.selected.agree').length === 0:
                 return 1.0;
               default:
                 return -1.0;
@@ -195,8 +195,9 @@
      */
     $('.to-results').click(function(ev) {
       if ($(this).hasClass('disabled')) {
-        return ev.preventDefault();
+        ev.preventDefault();
       }
+      return ga('send', 'event', 'survey', 'show-results', 'votes-for-agendas:' + votes_serialize());
     });
     $('a.expand').click(function(ev) {
       var id;
