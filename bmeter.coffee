@@ -110,7 +110,7 @@ $ ->
 				dis_agree=switch
 					when a.find('button.selected.agree').length isnt 0 then 1.0
 					else -1.0
-				ps=$.parseJSON a.attr 'data-parties-scores'
+				ps=$.parseJSON a.attr 'data-parties-scores' #??? Optimize by parsing once and setting a.data!
 				for own party,score of ps
 					do (party,score)->
 						final[party] or=[] # Initialize to empty array, once.
@@ -131,10 +131,10 @@ $ ->
 				.attr 'src','meter/zero.png'
 				.siblings 'span'
 				###
-		r=$ '#parties-list'
-		p=r.children().get()
+		ol=$ '#parties-list' # Parent <ol>.
+		ch=ol.children().get() # Children <li>.
 		.sort (x,y)->if (parse_score x)<(parse_score y) then 1 else -1
-		r.append p
+		ol.append ch
 		# Count votes.
 		$ '#results>p span'
 		.text $('#agendas button.selected:not(.indifferent)').length

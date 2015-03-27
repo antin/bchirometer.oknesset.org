@@ -68,7 +68,7 @@
       return show_page('#agendas');
     });
     page('results:votes?', function(context) {
-      var agenda, e, final, p, party, r, scores, vote, votes, _fn, _fn1;
+      var agenda, ch, e, final, ol, party, scores, vote, votes, _fn, _fn1;
       if (!context.params.votes) {
         console.log('Missing votes; redirecting.');
         page('#!splash');
@@ -146,15 +146,15 @@
         scores = final[party];
         _fn1(party, scores);
       }
-      r = $('#parties-list');
-      p = r.children().get().sort(function(x, y) {
+      ol = $('#parties-list');
+      ch = ol.children().get().sort(function(x, y) {
         if ((parse_score(x)) < (parse_score(y))) {
           return 1;
         } else {
           return -1;
         }
       });
-      r.append(p);
+      ol.append(ch);
       $('#results>p span').text($('#agendas button.selected:not(.indifferent)').length);
       $('#parties-list li>img').hide().first().show();
       return show_page('#results');
